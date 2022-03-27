@@ -17,7 +17,7 @@
     "lib/**/*"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build --clean",
     "build-watch": "tsc -w",
     "prepare": "npm run build"
   },
