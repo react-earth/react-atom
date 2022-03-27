@@ -1,6 +1,6 @@
 {
   "name": "@react-atom/playground",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Easily JS",
   "license": "MIT",
   "private": true,
@@ -10,10 +10,10 @@
   "dependencies": {
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
-    "@react-atom/atom": "^1.1.0",
-    "@react-atom/atom-emotion": "^1.1.0",
-    "@react-atom/atom-styled-components": "^1.1.0",
-    "@react-atom/tokens": "^1.1.0",
+    "@react-atom/atom": "^1.1.1",
+    "@react-atom/atom-emotion": "^1.1.1",
+    "@react-atom/atom-styled-components": "^1.1.1",
+    "@react-atom/tokens": "^1.1.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "styled-components": "^5.1.0"
