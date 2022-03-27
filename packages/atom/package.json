@@ -1,6 +1,6 @@
 {
   "name": "@react-atom/atom",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Easily JS",
   "license": "MIT",
   "main": "lib/index.js",
@@ -10,7 +10,7 @@
     "build-watch": "tsc -w"
   },
   "dependencies": {
-    "@react-atom/core": "^1.0.0"
+    "@react-atom/core": "^1.1.0"
   },
   "peerDependencies": {
     "react": ">=16.0.0"

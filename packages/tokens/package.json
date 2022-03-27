@@ -1,6 +1,6 @@
 {
   "name": "@react-atom/tokens",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Easily JS",
   "license": "MIT",
   "main": "lib/index.js",
