@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "jsx": "react",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "declaration": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "target": "es6"
+  },
+  "exclude": ["node_modules", "**/*.test.ts"]
+}

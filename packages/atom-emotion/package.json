@@ -1,0 +1,27 @@
+{
+  "name": "@react-atom/atom-emotion",
+  "version": "1.0.0",
+  "author": "Easily JS",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build-watch": "tsc -w"
+  },
+  "dependencies": {
+    "@react-atom/core": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@emotion/react": ">=10.0.0",
+    "@emotion/styled": ">=10.0.0",
+    "react": ">=16.0.0"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
+    "@types/react": "^17.0.0",
+    "react": "^17.0.0",
+    "typescript": "^4.0.0"
+  }
+}

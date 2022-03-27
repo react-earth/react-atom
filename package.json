@@ -1,0 +1,19 @@
+{
+  "name": "react-atom",
+  "version": "independent",
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "build-watch": "lerna run build-watch --parallel --stream",
+    "playground": "lerna run --stream --scope @react-atom/playground start"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
