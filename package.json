@@ -6,6 +6,7 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "build-watch": "lerna run build-watch --parallel --stream",
+    "publish-packages": "learn publish",
     "playground": "lerna run --stream --scope @react-atom/playground start"
   },
   "workspaces": {
