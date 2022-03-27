@@ -5,9 +5,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "build-watch": "lerna run build-watch --parallel --stream",
     "publish-packages": "lerna publish",
-    "playground": "lerna run --stream --scope @react-atom/playground start"
+    "playground": "yarn --cwd playground start"
   },
   "workspaces": {
     "packages": [
