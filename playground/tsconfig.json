@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["./src"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "baseUrl": ".",
+  "compilerOptions": {
+    "paths": {
+      "@react-atom/atom": ["../packages/atom/src/index"],
+      "@react-atom/atom-styled-components": ["../packages/atom-styled-components/src/index"],
+      "@react-atom/atom-emotion": ["../packages/atom-emotion/src/index"],
+      "@react-atom/tokens": ["../packages/tokens/src/index"]
+    }
+  }
+}

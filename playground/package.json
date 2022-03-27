@@ -1,5 +1,6 @@
 {
   "name": "@react-atom/playground",
+  "version": "independent",
   "author": "easilyjs",
   "license": "MIT",
   "private": true,
@@ -9,10 +10,6 @@
   "dependencies": {
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
-    "@react-atom/atom": "^1.1.1",
-    "@react-atom/atom-emotion": "^1.1.1",
-    "@react-atom/atom-styled-components": "^1.1.1",
-    "@react-atom/tokens": "^1.1.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "styled-components": "^5.1.0"
@@ -23,6 +20,7 @@
     "@types/styled-components": "^5.1.0",
     "@vitejs/plugin-react": "^1.0.0",
     "typescript": "^4.0.0",
-    "vite": "^2.8.0"
+    "vite": "^2.8.0",
+    "vite-tsconfig-paths": "^3.4.0"
   }
 }
