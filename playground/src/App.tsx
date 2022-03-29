@@ -10,57 +10,84 @@ export const App = () => {
       h="heightFull"
       fontFamily="sans"
       fontWeight="semiBold"
-      p="1x"
-      flex={{ direction: 'column', justify: 'center' }}
+      p="2x"
+      boxSizing="border-box"
+      flex={{ direction: 'column', gap: '3x' }}
     >
-      <Atom flex={{ direction: 'row', gap: '1x' }}>
-        {new Array(5).fill(0).map((_, index) => (
-          <Atom
-            key={index}
-            w="fill"
-            p="3x"
-            c="white"
-            bg="blue50"
-            boxSizing="border-box"
-            textAlign="center"
-            as="section"
-          >
+      <Atom>
+        <Atom fontSize="3xl" c="white" fontWeight="semiBold" textAlign="center">
+          Flex layout
+        </Atom>
+        <Atom mt="2x" flex={{ direction: 'row', gap: '1x' }}>
+          <Atom flexItem={{ grow: 1 }} p="3x" c="white" bg="blue50" boxSizing="border-box" textAlign="center">
             atom
           </Atom>
-        ))}
-      </Atom>
-      <AtomStyledComponents mt="1x" flex={{ direction: 'row', gap: '1x' }}>
-        {new Array(5).fill(0).map((_, index) => (
-          <AtomStyledComponents
-            key={index}
-            w="fill"
-            p="3x"
-            c="white"
-            bg="amber50"
-            boxSizing="border-box"
-            textAlign="center"
-            as="section"
-          >
+          <AtomStyledComponents p="3x" c="white" bg="amber50" boxSizing="border-box" textAlign="center">
             atom-styled-components
           </AtomStyledComponents>
-        ))}
-      </AtomStyledComponents>
-      <AtomEmotion mt="1x" flex={{ direction: 'row', gap: '1x' }}>
-        {new Array(5).fill(0).map((_, index) => (
-          <AtomEmotion
-            key={index}
-            w="fill"
-            p="3x"
-            c="white"
-            bg="pink50"
-            boxSizing="border-box"
-            textAlign="center"
-            as="section"
-          >
+          <AtomEmotion p="3x" c="white" bg="pink50" boxSizing="border-box" textAlign="center">
             atom-emotion
           </AtomEmotion>
-        ))}
-      </AtomEmotion>
+        </Atom>
+      </Atom>
+      <Atom>
+        <Atom fontSize="3xl" c="white" fontWeight="semiBold" textAlign="center">
+          Pseudo style
+        </Atom>
+        <Atom mt="2x" flex={{ direction: 'row', gap: '1x' }}>
+          <Atom
+            as="form"
+            bg="gray90"
+            flex={{ direction: 'column', gap: '1x' }}
+            flexItem={{ grow: 1 }}
+            p="2x"
+            boxSizing="border-box"
+            hover={{ bg: 'gray50' }}
+            active={{ bg: 'blue50' }}
+            focusWithin={{ bg: 'yellow50' }}
+          >
+            <Atom textAlign="center" c="white">
+              atom
+            </Atom>
+            <Atom as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
+            <Atom as="input" placeholder="password" p="1x" focus={{ bg: 'yellow50' }} />
+          </Atom>
+          <AtomStyledComponents
+            as="form"
+            bg="gray90"
+            flex={{ direction: 'column', gap: '1x' }}
+            flexItem={{ grow: 1 }}
+            p="2x"
+            boxSizing="border-box"
+            hover={{ bg: 'gray50' }}
+            active={{ bg: 'blue50' }}
+            focusWithin={{ bg: 'yellow50' }}
+          >
+            <AtomStyledComponents textAlign="center" c="white">
+              atom-styled-components
+            </AtomStyledComponents>
+            <AtomStyledComponents mt="1x" as="input" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
+            <AtomStyledComponents as="input" placeholder="password" p="1x" focus={{ bg: 'yellow50' }} />
+          </AtomStyledComponents>
+          <AtomEmotion
+            as="form"
+            bg="gray90"
+            flex={{ direction: 'column', gap: '1x' }}
+            flexItem={{ grow: 1 }}
+            p="2x"
+            boxSizing="border-box"
+            hover={{ bg: 'gray50' }}
+            active={{ bg: 'blue50' }}
+            focusWithin={{ bg: 'yellow50' }}
+          >
+            <AtomEmotion textAlign="center" c="white">
+              atom-emotion
+            </AtomEmotion>
+            <AtomEmotion mt="1x" as="input" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
+            <AtomEmotion as="input" placeholder="password" p="1x" focus={{ bg: 'yellow50' }} />
+          </AtomEmotion>
+        </Atom>
+      </Atom>
     </Atom>
   );
 };

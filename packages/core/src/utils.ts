@@ -1,5 +1,18 @@
 import { CSSProperties } from 'react';
-import { AtomProps, AtomStyleProps, Tokens, SpacingToken, GridFr, Flex, FlexItem, Grid, GridItem } from './types';
+import {
+  AtomHtmlProps,
+  AtomProps,
+  AtomPseudoStyleProps,
+  AtomStyleProps,
+  Flex,
+  FlexItem,
+  Grid,
+  GridFr,
+  GridItem,
+  PseudoStyle,
+  SpacingToken,
+  Tokens,
+} from './types';
 
 export type ParseFn = (key: string, value: any, tokens: Tokens) => CSSProperties;
 
@@ -108,7 +121,7 @@ const fontSizeParser = (): ParseFn => {
   };
 };
 
-export const ATOM_STYLE_PARSE_FN_MAPPING: Record<keyof AtomStyleProps, ParseFn> = {
+export const ATOM_STYLE_PROPS: Record<keyof AtomStyleProps, ParseFn> = {
   position: defaultParser(),
   left: spacingParser(),
   right: spacingParser(),
@@ -164,20 +177,42 @@ export const ATOM_STYLE_PARSE_FN_MAPPING: Record<keyof AtomStyleProps, ParseFn> 
   cursor: defaultParser(),
   zIndex: tokenParser('zIndex'),
 };
+const ATOM_PSEUDO_STYLE_PROPS = ['hover', 'active', 'focus', 'focusWithin'];
 
-export const parseAtomProps = (atomProps: AtomProps, tokens: Tokens) => {
+export const mergeStyle = (style: CSSProperties, newStyle: CSSProperties) => {
+  Object.entries(newStyle).forEach(([newKey, newValue]) => {
+    style[newKey] = newValue;
+  });
+};
+
+const parseAtomStyleProps = (atomStyleProps: AtomStyleProps, tokens: Tokens) => {
   const style: CSSProperties = {};
-  const other = {};
-  const atomStyleKeys = Object.keys(ATOM_STYLE_PARSE_FN_MAPPING);
-  Object.entries(atomProps).forEach(([key, value]) => {
-    if (atomStyleKeys.includes(key) && isSet(value)) {
-      const newStyle = (ATOM_STYLE_PARSE_FN_MAPPING[key] as ParseFn)(key, value, tokens);
-      Object.entries(newStyle).forEach(([styleKey, styleValue]) => {
-        style[styleKey] = styleValue;
-      });
-    } else {
-      other[key] = value;
+  Object.entries(atomStyleProps).forEach(([key, value]) => {
+    if (isSet(value)) {
+      mergeStyle(style, ATOM_STYLE_PROPS[key](key, value, tokens));
     }
   });
-  return { style, other };
+  return style;
+};
+
+export const parseAtomProps = (atomProps: AtomProps, tokens: Tokens) => {
+  const atomStyleProps: AtomStyleProps = {};
+  const atomPseudoStyleProps: AtomPseudoStyleProps = {};
+  const htmlProps: AtomHtmlProps = {};
+  // split props
+  Object.entries(atomProps).forEach(([key, value]) => {
+    if (key in ATOM_STYLE_PROPS) {
+      atomStyleProps[key] = value;
+    } else if (ATOM_PSEUDO_STYLE_PROPS.includes(key)) {
+      atomPseudoStyleProps[key] = value;
+    } else {
+      htmlProps[key] = value;
+    }
+  });
+  const style = parseAtomStyleProps(atomStyleProps, tokens);
+  const pseudoStyle: PseudoStyle = {};
+  Object.entries(atomPseudoStyleProps).forEach(([key, value]) => {
+    pseudoStyle[key] = parseAtomStyleProps(value, tokens);
+  });
+  return { style, pseudoStyle, htmlProps };
 };

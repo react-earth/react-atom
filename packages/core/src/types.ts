@@ -120,5 +120,14 @@ export type AtomStyleProps<T extends Tokens = Tokens> = {
   cursor?: CSSProperties['cursor'];
   zIndex?: ZIndexToken<T>;
 };
-export type AtomHtmlProps = HTMLProps<HTMLElement>;
-export type AtomProps<T extends Tokens = Tokens> = AtomStyleProps<T> & AtomHtmlProps & { as?: ElementType };
+export type AtomPseudoStyleProps<T extends Tokens = Tokens> = {
+  hover?: AtomStyleProps<T>;
+  active?: AtomStyleProps<T>;
+  focus?: AtomStyleProps<T>;
+  focusWithin?: AtomStyleProps<T>;
+};
+export type PseudoStyle = Partial<Record<keyof AtomPseudoStyleProps, CSSProperties>>;
+export type AtomHtmlProps = Omit<HTMLProps<HTMLElement>, 'as'>;
+export type AtomProps<T extends Tokens = Tokens> = AtomStyleProps<T> &
+  AtomPseudoStyleProps<T> &
+  AtomHtmlProps & { as?: ElementType };
