@@ -26,7 +26,7 @@ const StyledAtom = styled.section<{ $style: CSSProperties; $pseudoStyle: PseudoS
       .sort(([key1], [key2]) => PSEUDO_STYLE_PRIORITY[key1] - PSEUDO_STYLE_PRIORITY[key2])
       .map(
         ([key, style]) => `
-          &:${key} {
+          &:${normalizeKey(key)} {
             ${parseStyle(style)}
           }
         `
