@@ -32,7 +32,31 @@ export const App = () => {
       </Atom>
       <Atom>
         <Atom fontSize="3xl" c="white" fontWeight="semiBold" textAlign="center">
-          Pseudo Classes
+          Grid layout
+        </Atom>
+        <Atom mt="2x" grid={{ columns: 4, gap: '1x' }}>
+          <AtomStyledComponents p="3x" c="white" bg="amber50" boxSizing="border-box" textAlign="center">
+            atom-styled-components
+          </AtomStyledComponents>
+          <Atom p="3x" gridItem={{ span: 2, rows: 2 }} c="white" bg="blue50" boxSizing="border-box">
+            <Atom flex={{ justify: 'center', align: 'center' }} w="fill" h="fill">
+              atom
+            </Atom>
+          </Atom>
+          <AtomStyledComponents p="3x" c="white" bg="amber50" boxSizing="border-box" textAlign="center">
+            atom-styled-components
+          </AtomStyledComponents>
+          <AtomEmotion p="3x" c="white" bg="pink50" boxSizing="border-box" textAlign="center">
+            atom-emotion
+          </AtomEmotion>
+          <AtomEmotion p="3x" c="white" bg="pink50" boxSizing="border-box" textAlign="center">
+            atom-emotion
+          </AtomEmotion>
+        </Atom>
+      </Atom>
+      <Atom>
+        <Atom fontSize="3xl" c="white" fontWeight="semiBold" textAlign="center">
+          Pseudo classes
         </Atom>
         <Atom mt="2x" flex={{ direction: 'row', gap: '1x' }}>
           <Atom

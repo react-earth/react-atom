@@ -78,8 +78,8 @@ export const gridParser = (): ParseFn => {
     const css: CSSProperties = {};
     css.display = 'grid';
     isSet(value.flow) && (css.gridAutoColumns = value.flow);
-    isSet(value.rows) && (css.gridRow = gridFrParse(value.rows));
-    isSet(value.columns) && (css.gridColumn = gridFrParse(value.columns));
+    isSet(value.rows) && (css.gridTemplateRows = gridFrParse(value.rows));
+    isSet(value.columns) && (css.gridTemplateColumns = gridFrParse(value.columns));
     isSet(value.justify) && (css.justifyItems = value.justify);
     isSet(value.align) && (css.alignItems = value.align);
     isSet(value.gap) && (css.gap = spacingParse(value.gap, tokens));
