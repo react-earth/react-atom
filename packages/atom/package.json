@@ -1,6 +1,6 @@
 {
   "name": "@react-atom/atom",
-  "version": "1.1.8",
+  "version": "1.2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/react-atom/react-atom.git"
@@ -21,7 +21,7 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "@react-atom/core": "^1.1.8"
+    "@react-atom/core": "^1.2.0"
   },
   "peerDependencies": {
     "react": ">=16.0.0"
