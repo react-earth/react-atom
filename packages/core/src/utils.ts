@@ -1,4 +1,5 @@
 import { CSSProperties } from 'react';
+import { ATOM_PSEUDO_STYLE_PROPS, ATOM_STYLE_PROPS } from './constants';
 import {
   AtomHtmlProps,
   AtomProps,
@@ -9,16 +10,23 @@ import {
   Grid,
   GridFr,
   GridItem,
+  ParseFn,
   PseudoStyle,
   SpacingToken,
   Tokens,
 } from './types';
 
-export type ParseFn = (key: string, value: any, tokens: Tokens) => CSSProperties;
+export const isSet = (value: any) => value !== undefined;
 
-const isSet = (value: any) => value !== undefined;
+export const tokenParser = (tokenKey: keyof Tokens, alias?: keyof CSSProperties): ParseFn => {
+  return (key, value, tokens) => {
+    return {
+      [alias || key]: tokens[tokenKey][value],
+    };
+  };
+};
 
-const spacingParse = (token: SpacingToken | SpacingToken[], tokens: Tokens) => {
+export const spacingParse = (token: SpacingToken | SpacingToken[], tokens: Tokens) => {
   const spacingItemParse = (tokenItem: SpacingToken) => {
     if (typeof tokenItem === 'string') {
       if (tokenItem in tokens.spacing) {
@@ -36,13 +44,14 @@ const spacingParse = (token: SpacingToken | SpacingToken[], tokens: Tokens) => {
     return spacingItemParse(token);
   }
 };
-const gridFrParse = (token: GridFr) => (typeof token === 'number' ? `repeat(${token}, 1fr)` : token);
+
+export const gridFrParse = (token: GridFr) => (typeof token === 'number' ? `repeat(${token}, 1fr)` : token);
 
 export const defaultParser = (): ParseFn => {
   return (key, value) => ({ [key]: value });
 };
 
-const flexParser = (): ParseFn => {
+export const flexParser = (): ParseFn => {
   return (_key, value: Flex, tokens) => {
     const css: CSSProperties = {};
     css.display = 'flex';
@@ -55,7 +64,7 @@ const flexParser = (): ParseFn => {
   };
 };
 
-const flexItemParser = (): ParseFn => {
+export const flexItemParser = (): ParseFn => {
   return (_key, value: FlexItem) => {
     const css: CSSProperties = {};
     isSet(value.grow) && (css.flexGrow = value.grow);
@@ -64,7 +73,7 @@ const flexItemParser = (): ParseFn => {
   };
 };
 
-const gridParser = (): ParseFn => {
+export const gridParser = (): ParseFn => {
   return (_key, value: Grid, tokens) => {
     const css: CSSProperties = {};
     css.display = 'grid';
@@ -78,7 +87,7 @@ const gridParser = (): ParseFn => {
   };
 };
 
-const gridItemParser = (): ParseFn => {
+export const gridItemParser = (): ParseFn => {
   return (_key, value: GridItem) => {
     const css: CSSProperties = {};
     isSet(value.span) && (css.gridColumnEnd = `span ${value.span}`);
@@ -89,7 +98,7 @@ const gridItemParser = (): ParseFn => {
   };
 };
 
-const spacingParser = (alias?: keyof CSSProperties | (keyof CSSProperties)[]): ParseFn => {
+export const spacingParser = (alias?: keyof CSSProperties | (keyof CSSProperties)[]): ParseFn => {
   return (key, value, tokens) => {
     const css = {};
     if (Array.isArray(alias)) {
@@ -103,15 +112,7 @@ const spacingParser = (alias?: keyof CSSProperties | (keyof CSSProperties)[]): P
   };
 };
 
-const tokenParser = (tokenKey: keyof Tokens, alias?: keyof CSSProperties): ParseFn => {
-  return (key, value, tokens) => {
-    return {
-      [alias || key]: tokens[tokenKey][value],
-    };
-  };
-};
-
-const fontSizeParser = (): ParseFn => {
+export const fontSizeParser = (): ParseFn => {
   return (_key, value, tokens) => {
     const [fontSize, lineHeight] = tokens.fontSize[value];
     return {
@@ -121,71 +122,13 @@ const fontSizeParser = (): ParseFn => {
   };
 };
 
-export const ATOM_STYLE_PROPS: Record<keyof AtomStyleProps, ParseFn> = {
-  position: defaultParser(),
-  left: spacingParser(),
-  right: spacingParser(),
-  top: spacingParser(),
-  bottom: spacingParser(),
-  flex: flexParser(),
-  flexItem: flexItemParser(),
-  grid: gridParser(),
-  gridItem: gridItemParser(),
-  w: spacingParser('width'),
-  minW: spacingParser('minWidth'),
-  maxW: spacingParser('maxWidth'),
-  h: spacingParser('height'),
-  minH: spacingParser('minHeight'),
-  maxH: spacingParser('maxHeight'),
-  m: spacingParser('margin'),
-  mx: spacingParser(['marginLeft', 'marginRight']),
-  my: spacingParser(['marginTop', 'marginBottom']),
-  ml: spacingParser('marginLeft'),
-  mr: spacingParser('marginRight'),
-  mt: spacingParser('marginTop'),
-  mb: spacingParser('marginBottom'),
-  p: spacingParser('padding'),
-  px: spacingParser(['paddingLeft', 'paddingRight']),
-  py: spacingParser(['paddingTop', 'paddingBottom']),
-  pl: spacingParser('paddingLeft'),
-  pr: spacingParser('paddingRight'),
-  pt: spacingParser('paddingTop'),
-  pb: spacingParser('paddingBottom'),
-  display: defaultParser(),
-  boxSizing: defaultParser(),
-  c: tokenParser('color', 'color'),
-  bg: tokenParser('color', 'background'),
-  fontFamily: tokenParser('fontFamily'),
-  fontSize: fontSizeParser(),
-  fontWeight: tokenParser('fontWeight'),
-  fontStyle: defaultParser(),
-  textAlign: defaultParser(),
-  textDecoration: defaultParser(),
-  textDecorationColor: defaultParser(),
-  textDecorationStyle: defaultParser(),
-  textOverflow: defaultParser(),
-  whiteSpace: defaultParser(),
-  border: tokenParser('border'),
-  borderStyle: defaultParser(),
-  borderWidth: spacingParser(),
-  borderColor: tokenParser('color'),
-  borderRadius: spacingParser(),
-  shadow: tokenParser('shadow', 'boxShadow'),
-  overflow: defaultParser(),
-  overflowX: defaultParser(),
-  overflowY: defaultParser(),
-  cursor: defaultParser(),
-  zIndex: tokenParser('zIndex'),
-};
-const ATOM_PSEUDO_STYLE_PROPS = ['hover', 'active', 'focus', 'focusWithin'];
-
 export const mergeStyle = (style: CSSProperties, newStyle: CSSProperties) => {
   Object.entries(newStyle).forEach(([newKey, newValue]) => {
     style[newKey] = newValue;
   });
 };
 
-const parseAtomStyleProps = (atomStyleProps: AtomStyleProps, tokens: Tokens) => {
+export const parseAtomStyleProps = (atomStyleProps: AtomStyleProps, tokens: Tokens) => {
   const style: CSSProperties = {};
   Object.entries(atomStyleProps).forEach(([key, value]) => {
     if (isSet(value)) {

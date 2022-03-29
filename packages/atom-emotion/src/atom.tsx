@@ -1,8 +1,13 @@
 import React, { CSSProperties } from 'react';
-import { AtomProps, DEFAULT_COMPONENT, parseAtomProps, PseudoStyle, Tokens } from '@react-atom/core';
+import {
+  AtomProps,
+  ATOM_PSEUDO_STYLE_PROPS,
+  DEFAULT_COMPONENT,
+  parseAtomProps,
+  PseudoStyle,
+  Tokens,
+} from '@react-atom/core';
 import styled from '@emotion/styled';
-
-const PSEUDO_STYLE_PRIORITY = ['focusWithin', 'focus', 'hover', 'active'];
 
 const normalizeKey = (key: string) => key.replace(/([A-Z])/g, '-$1').toLowerCase();
 
@@ -23,7 +28,11 @@ const StyledAtom = styled.section<{ $style: CSSProperties; $pseudoStyle: PseudoS
   ${({ $style }) => parseStyle($style)}
   ${({ $pseudoStyle }) => {
     return Object.entries($pseudoStyle)
-      .sort(([key1], [key2]) => PSEUDO_STYLE_PRIORITY[key1] - PSEUDO_STYLE_PRIORITY[key2])
+      .sort(
+        ([key1], [key2]) =>
+          ATOM_PSEUDO_STYLE_PROPS.findIndex((key) => key === key2) -
+          ATOM_PSEUDO_STYLE_PROPS.findIndex((key) => key === key1)
+      )
       .map(
         ([key, style]) => `
           &:${normalizeKey(key)} {

@@ -55,18 +55,18 @@ export const atom = <T extends Tokens = Tokens>(tokens: T) => {
     if (htmlStyle) {
       mergeStyle(style, htmlStyle);
     }
-    // pseudo style priority, focusWithin < focus < hover < active
-    if (isFocusWithIn && pseudoStyle.focusWithin) {
-      mergeStyle(style, pseudoStyle.focusWithin);
-    }
-    if (isFocus && pseudoStyle.focus) {
-      mergeStyle(style, pseudoStyle.focus);
-    }
+    // pseudo style priority, focus > focusWithin > active > hover
     if (isHover && pseudoStyle.hover) {
       mergeStyle(style, pseudoStyle.hover);
     }
     if (isActive && pseudoStyle.active) {
       mergeStyle(style, pseudoStyle.active);
+    }
+    if (isFocusWithIn && pseudoStyle.focusWithin) {
+      mergeStyle(style, pseudoStyle.focusWithin);
+    }
+    if (isFocus && pseudoStyle.focus) {
+      mergeStyle(style, pseudoStyle.focus);
     }
 
     return (

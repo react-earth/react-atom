@@ -31,10 +31,12 @@ export type Flex<T = Tokens> = {
   wrap?: CSSProperties['flexWrap'];
   gap?: SpacingToken<T>;
 };
+
 export type FlexItem = {
   grow?: CSSProperties['flexGrow'];
   shrink?: CSSProperties['flexShrink'];
 };
+
 export type GridFr = number | string;
 export type Grid<T = Tokens> = {
   flow?: CSSProperties['gridAutoFlow'];
@@ -44,12 +46,14 @@ export type Grid<T = Tokens> = {
   justify?: CSSProperties['justifyItems'];
   align?: CSSProperties['alignItems'];
 };
+
 export type GridItem = {
   span?: number;
   rows?: number;
   justify?: CSSProperties['justifySelf'];
   align?: CSSProperties['alignSelf'];
 };
+
 export type Layout<T = Tokens> = {
   flex?: Flex<T>;
   flexItem?: FlexItem;
@@ -120,13 +124,17 @@ export type AtomStyleProps<T extends Tokens = Tokens> = {
   cursor?: CSSProperties['cursor'];
   zIndex?: ZIndexToken<T>;
 };
+
 export type AtomPseudoStyleProps<T extends Tokens = Tokens> = {
   hover?: AtomStyleProps<T>;
   active?: AtomStyleProps<T>;
   focus?: AtomStyleProps<T>;
   focusWithin?: AtomStyleProps<T>;
 };
+
 export type PseudoStyle = Partial<Record<keyof AtomPseudoStyleProps, CSSProperties>>;
+export type ParseFn = (key: string, value: any, tokens: Tokens) => CSSProperties;
+
 export type AtomHtmlProps = Omit<HTMLProps<HTMLElement>, 'as'>;
 export type AtomProps<T extends Tokens = Tokens> = AtomStyleProps<T> &
   AtomPseudoStyleProps<T> &
