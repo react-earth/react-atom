@@ -1,10 +1,10 @@
 import React, { CSSProperties } from 'react';
 import {
   AtomProps,
-  ATOM_PSEUDO_STYLE_PROPS,
+  ATOM_PSEUDO_CLASS_PROPS,
   DEFAULT_COMPONENT,
   parseAtomProps,
-  PseudoStyle,
+  PseudoClassStyle,
   Tokens,
 } from '@react-atom/core';
 import styled from '@emotion/styled';
@@ -19,19 +19,19 @@ const parseStyle = (style: CSSProperties) =>
 export const atom = <T extends Tokens = Tokens>(tokens: T) => {
   return (props: AtomProps<T>) => {
     const { as: Component = DEFAULT_COMPONENT, ...rest } = props;
-    const { style, pseudoStyle, htmlProps } = parseAtomProps(rest as AtomProps, tokens);
-    return <StyledAtom as={Component} $style={style} $pseudoStyle={pseudoStyle} {...htmlProps} />;
+    const { style, pseudoClassStyle, htmlProps } = parseAtomProps(rest as AtomProps, tokens);
+    return <StyledAtom as={Component} $style={style} $pseudoClassStyle={pseudoClassStyle} {...htmlProps} />;
   };
 };
 
-const StyledAtom = styled.section<{ $style: CSSProperties; $pseudoStyle: PseudoStyle }>`
+const StyledAtom = styled.section<{ $style: CSSProperties; $pseudoClassStyle: PseudoClassStyle }>`
   ${({ $style }) => parseStyle($style)}
-  ${({ $pseudoStyle }) => {
-    return Object.entries($pseudoStyle)
+  ${({ $pseudoClassStyle }) => {
+    return Object.entries($pseudoClassStyle)
       .sort(
         ([key1], [key2]) =>
-          ATOM_PSEUDO_STYLE_PROPS.findIndex((key) => key === key2) -
-          ATOM_PSEUDO_STYLE_PROPS.findIndex((key) => key === key1)
+          ATOM_PSEUDO_CLASS_PROPS.findIndex((key) => key === key2) -
+          ATOM_PSEUDO_CLASS_PROPS.findIndex((key) => key === key1)
       )
       .map(
         ([key, style]) => `

@@ -1,9 +1,9 @@
 import { CSSProperties } from 'react';
-import { ATOM_PSEUDO_STYLE_PROPS, ATOM_STYLE_PROPS } from './constants';
+import { ATOM_PSEUDO_CLASS_PROPS, ATOM_STYLE_PROPS } from './constants';
 import {
   AtomHtmlProps,
   AtomProps,
-  AtomPseudoStyleProps,
+  AtomPseudoClassProps,
   AtomStyleProps,
   Flex,
   FlexItem,
@@ -11,7 +11,7 @@ import {
   GridFr,
   GridItem,
   ParseFn,
-  PseudoStyle,
+  PseudoClassStyle,
   SpacingToken,
   Tokens,
 } from './types';
@@ -140,22 +140,22 @@ export const parseAtomStyleProps = (atomStyleProps: AtomStyleProps, tokens: Toke
 
 export const parseAtomProps = (atomProps: AtomProps, tokens: Tokens) => {
   const atomStyleProps: AtomStyleProps = {};
-  const atomPseudoStyleProps: AtomPseudoStyleProps = {};
+  const atomPseudoClassProps: AtomPseudoClassProps = {};
   const htmlProps: AtomHtmlProps = {};
   // split props
   Object.entries(atomProps).forEach(([key, value]) => {
     if (key in ATOM_STYLE_PROPS) {
       atomStyleProps[key] = value;
-    } else if (ATOM_PSEUDO_STYLE_PROPS.includes(key)) {
-      atomPseudoStyleProps[key] = value;
+    } else if (ATOM_PSEUDO_CLASS_PROPS.includes(key)) {
+      atomPseudoClassProps[key] = value;
     } else {
       htmlProps[key] = value;
     }
   });
   const style = parseAtomStyleProps(atomStyleProps, tokens);
-  const pseudoStyle: PseudoStyle = {};
-  Object.entries(atomPseudoStyleProps).forEach(([key, value]) => {
-    pseudoStyle[key] = parseAtomStyleProps(value, tokens);
+  const pseudoClassStyle: PseudoClassStyle = {};
+  Object.entries(atomPseudoClassProps).forEach(([key, value]) => {
+    pseudoClassStyle[key] = parseAtomStyleProps(value, tokens);
   });
-  return { style, pseudoStyle, htmlProps };
+  return { style, pseudoClassStyle, htmlProps };
 };

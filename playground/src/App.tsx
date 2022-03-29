@@ -32,7 +32,7 @@ export const App = () => {
       </Atom>
       <Atom>
         <Atom fontSize="3xl" c="white" fontWeight="semiBold" textAlign="center">
-          Pseudo style
+          Pseudo Classes
         </Atom>
         <Atom mt="2x" flex={{ direction: 'row', gap: '1x' }}>
           <Atom

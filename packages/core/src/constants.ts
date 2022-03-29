@@ -70,4 +70,4 @@ export const ATOM_STYLE_PROPS: Record<keyof AtomStyleProps, ParseFn> = {
 };
 
 // order by priority
-export const ATOM_PSEUDO_STYLE_PROPS = ['focus', 'focusWithin', 'active', 'hover'];
+export const ATOM_PSEUDO_CLASS_PROPS = ['focus', 'focusWithin', 'active', 'hover'];

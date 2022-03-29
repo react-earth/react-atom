@@ -4,7 +4,7 @@ import { AtomProps, DEFAULT_COMPONENT, mergeStyle, parseAtomProps, Tokens } from
 export const atom = <T extends Tokens = Tokens>(tokens: T) => {
   return (props: AtomProps<T>) => {
     const { as: Component = DEFAULT_COMPONENT, ...rest } = props;
-    const { style, pseudoStyle, htmlProps } = parseAtomProps(rest as AtomProps, tokens);
+    const { style, pseudoClassStyle, htmlProps } = parseAtomProps(rest as AtomProps, tokens);
 
     const [isHover, setIsHover] = useState<boolean>(false);
     const [isActive, setIsActive] = useState<boolean>(false);
@@ -14,15 +14,15 @@ export const atom = <T extends Tokens = Tokens>(tokens: T) => {
     const { style: htmlStyle, onMouseEnter, onMouseLeave, onMouseDown, onFocus, onBlur, ...restHtmlProps } = htmlProps;
 
     const onMouseEnterWrapper: typeof onMouseEnter = (event) => {
-      pseudoStyle.hover && setIsHover(true);
+      pseudoClassStyle.hover && setIsHover(true);
       onMouseEnter?.(event);
     };
     const onMouseLeaveWrapper: typeof onMouseLeave = (event) => {
-      pseudoStyle.hover && setIsHover(false);
+      pseudoClassStyle.hover && setIsHover(false);
       onMouseLeave?.(event);
     };
     const onMouseDownWrapper: typeof onMouseDown = (event) => {
-      if (pseudoStyle.active) {
+      if (pseudoClassStyle.active) {
         setIsActive(true);
         // use document mouse up, avoid can't trigger onMouseUp when move out of current element
         document.addEventListener(
@@ -37,17 +37,17 @@ export const atom = <T extends Tokens = Tokens>(tokens: T) => {
     };
     const onFocusWrapper: typeof onFocus = (event) => {
       if (event.currentTarget === event.target) {
-        pseudoStyle.focus && setIsFocus(true);
+        pseudoClassStyle.focus && setIsFocus(true);
       } else {
-        pseudoStyle.focusWithin && setIsFocusWithIn(true);
+        pseudoClassStyle.focusWithin && setIsFocusWithIn(true);
       }
       onFocus?.(event);
     };
     const onBlurWrapper: typeof onBlur = (event) => {
       if (event.currentTarget === event.target) {
-        pseudoStyle.focus && setIsFocus(false);
+        pseudoClassStyle.focus && setIsFocus(false);
       } else {
-        pseudoStyle.focusWithin && setIsFocusWithIn(false);
+        pseudoClassStyle.focusWithin && setIsFocusWithIn(false);
       }
       onBlur?.(event);
     };
@@ -56,17 +56,17 @@ export const atom = <T extends Tokens = Tokens>(tokens: T) => {
       mergeStyle(style, htmlStyle);
     }
     // pseudo style priority, focus > focusWithin > active > hover
-    if (isHover && pseudoStyle.hover) {
-      mergeStyle(style, pseudoStyle.hover);
+    if (isHover && pseudoClassStyle.hover) {
+      mergeStyle(style, pseudoClassStyle.hover);
     }
-    if (isActive && pseudoStyle.active) {
-      mergeStyle(style, pseudoStyle.active);
+    if (isActive && pseudoClassStyle.active) {
+      mergeStyle(style, pseudoClassStyle.active);
     }
-    if (isFocusWithIn && pseudoStyle.focusWithin) {
-      mergeStyle(style, pseudoStyle.focusWithin);
+    if (isFocusWithIn && pseudoClassStyle.focusWithin) {
+      mergeStyle(style, pseudoClassStyle.focusWithin);
     }
-    if (isFocus && pseudoStyle.focus) {
-      mergeStyle(style, pseudoStyle.focus);
+    if (isFocus && pseudoClassStyle.focus) {
+      mergeStyle(style, pseudoClassStyle.focus);
     }
 
     return (
