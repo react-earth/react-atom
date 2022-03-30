@@ -66,15 +66,24 @@ export const App = () => {
             flexItem={{ grow: 1 }}
             p="2x"
             boxSizing="border-box"
-            hover={{ bg: 'gray50' }}
-            active={{ bg: 'blue50' }}
-            focusWithin={{ bg: 'yellow50' }}
           >
-            <Atom textAlign="center" c="white">
-              atom
+            <Atom c="white" focusWithin={{ c: 'yellow50' }} flex={{ direction: 'column', gap: '1x' }}>
+              <Atom textAlign="center">atom</Atom>
+              <Atom as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
+              <Atom as="input" placeholder="email" p="1x" focus={{ bg: 'yellow50' }} />
             </Atom>
-            <Atom as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
-            <Atom as="input" placeholder="password" p="1x" focus={{ bg: 'yellow50' }} />
+
+            <Atom
+              textAlign="center"
+              py="1x"
+              c="white"
+              bg="gray50"
+              cursor="pointer"
+              hover={{ bg: 'blue50' }}
+              active={{ bg: 'blue60' }}
+            >
+              submit
+            </Atom>
           </Atom>
           <AtomStyledComponents
             as="form"
@@ -83,15 +92,23 @@ export const App = () => {
             flexItem={{ grow: 1 }}
             p="2x"
             boxSizing="border-box"
-            hover={{ bg: 'gray50' }}
-            active={{ bg: 'blue50' }}
-            focusWithin={{ bg: 'yellow50' }}
           >
-            <AtomStyledComponents textAlign="center" c="white">
-              atom-styled-components
+            <AtomStyledComponents c="white" focusWithin={{ c: 'yellow50' }} flex={{ direction: 'column', gap: '1x' }}>
+              <AtomStyledComponents textAlign="center">atom-styled-components</AtomStyledComponents>
+              <AtomStyledComponents as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
+              <AtomStyledComponents as="input" placeholder="email" p="1x" focus={{ bg: 'yellow50' }} />
             </AtomStyledComponents>
-            <AtomStyledComponents mt="1x" as="input" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
-            <AtomStyledComponents as="input" placeholder="password" p="1x" focus={{ bg: 'yellow50' }} />
+            <AtomStyledComponents
+              textAlign="center"
+              py="1x"
+              c="white"
+              bg="gray50"
+              cursor="pointer"
+              hover={{ bg: 'blue50' }}
+              active={{ bg: 'blue60' }}
+            >
+              submit
+            </AtomStyledComponents>
           </AtomStyledComponents>
           <AtomEmotion
             as="form"
@@ -100,15 +117,23 @@ export const App = () => {
             flexItem={{ grow: 1 }}
             p="2x"
             boxSizing="border-box"
-            hover={{ bg: 'gray50' }}
-            active={{ bg: 'blue50' }}
-            focusWithin={{ bg: 'yellow50' }}
           >
-            <AtomEmotion textAlign="center" c="white">
-              atom-emotion
+            <AtomEmotion c="white" focusWithin={{ c: 'yellow50' }} flex={{ direction: 'column', gap: '1x' }}>
+              <AtomEmotion textAlign="center">atom-emotion</AtomEmotion>
+              <AtomEmotion as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
+              <AtomEmotion as="input" placeholder="email" p="1x" focus={{ bg: 'yellow50' }} />
             </AtomEmotion>
-            <AtomEmotion mt="1x" as="input" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
-            <AtomEmotion as="input" placeholder="password" p="1x" focus={{ bg: 'yellow50' }} />
+            <AtomEmotion
+              textAlign="center"
+              py="1x"
+              c="white"
+              bg="gray50"
+              cursor="pointer"
+              hover={{ bg: 'blue50' }}
+              active={{ bg: 'blue60' }}
+            >
+              submit
+            </AtomEmotion>
           </AtomEmotion>
         </Atom>
       </Atom>
