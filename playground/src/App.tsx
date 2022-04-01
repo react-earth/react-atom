@@ -1,11 +1,11 @@
 import React from 'react';
-import { Atom } from './components/Atom';
+import { AtomStyle } from './components/AtomStyle';
 import { AtomEmotion } from './components/AtomEmotion';
 import { AtomStyledComponents } from './components/AtomStyledComponents';
 
 export const App = () => {
   return (
-    <Atom
+    <AtomStyle
       bg="gray80"
       h="heightFull"
       fontFamily="sans"
@@ -14,52 +14,52 @@ export const App = () => {
       boxSizing="border-box"
       flex={{ direction: 'column', gap: '3x' }}
     >
-      <Atom>
-        <Atom fontSize="3xl" c="white" fontWeight="semiBold" textAlign="center">
+      <AtomStyle>
+        <AtomStyle fontSize="3xl" c="white" fontWeight="semiBold" textAlign="center">
           Flex layout
-        </Atom>
-        <Atom mt="2x" flex={{ direction: 'row', gap: '1x' }}>
-          <Atom flexItem={{ grow: 1 }} p="3x" c="white" bg="blue50" boxSizing="border-box" textAlign="center">
-            atom
-          </Atom>
+        </AtomStyle>
+        <AtomStyle mt="2x" flex={{ direction: 'row', gap: '1x' }}>
+          <AtomStyle flexItem={{ grow: 1 }} p="3x" c="white" bg="blue50" boxSizing="border-box" textAlign="center">
+            AtomStyle
+          </AtomStyle>
           <AtomStyledComponents p="3x" c="white" bg="amber50" boxSizing="border-box" textAlign="center">
-            atom-styled-components
+            AtomStyle-styled-components
           </AtomStyledComponents>
           <AtomEmotion p="3x" c="white" bg="pink50" boxSizing="border-box" textAlign="center">
-            atom-emotion
+            AtomStyle-emotion
           </AtomEmotion>
-        </Atom>
-      </Atom>
-      <Atom>
-        <Atom fontSize="3xl" c="white" fontWeight="semiBold" textAlign="center">
+        </AtomStyle>
+      </AtomStyle>
+      <AtomStyle>
+        <AtomStyle fontSize="3xl" c="white" fontWeight="semiBold" textAlign="center">
           Grid layout
-        </Atom>
-        <Atom mt="2x" grid={{ columns: 4, gap: '1x' }}>
+        </AtomStyle>
+        <AtomStyle mt="2x" grid={{ columns: 4, gap: '1x' }}>
           <AtomStyledComponents p="3x" c="white" bg="amber50" boxSizing="border-box" textAlign="center">
-            atom-styled-components
+            AtomStyle-styled-components
           </AtomStyledComponents>
-          <Atom p="3x" gridItem={{ span: 2, rows: 2 }} c="white" bg="blue50" boxSizing="border-box">
-            <Atom flex={{ justify: 'center', align: 'center' }} w="fill" h="fill">
-              atom
-            </Atom>
-          </Atom>
+          <AtomStyle p="3x" gridItem={{ span: 2, rows: 2 }} c="white" bg="blue50" boxSizing="border-box">
+            <AtomStyle flex={{ justify: 'center', align: 'center' }} w="fill" h="fill">
+              AtomStyle
+            </AtomStyle>
+          </AtomStyle>
           <AtomStyledComponents p="3x" c="white" bg="amber50" boxSizing="border-box" textAlign="center">
-            atom-styled-components
+            AtomStyle-styled-components
           </AtomStyledComponents>
           <AtomEmotion p="3x" c="white" bg="pink50" boxSizing="border-box" textAlign="center">
-            atom-emotion
+            AtomStyle-emotion
           </AtomEmotion>
           <AtomEmotion p="3x" c="white" bg="pink50" boxSizing="border-box" textAlign="center">
-            atom-emotion
+            AtomStyle-emotion
           </AtomEmotion>
-        </Atom>
-      </Atom>
-      <Atom>
-        <Atom fontSize="3xl" c="white" fontWeight="semiBold" textAlign="center">
+        </AtomStyle>
+      </AtomStyle>
+      <AtomStyle>
+        <AtomStyle fontSize="3xl" c="white" fontWeight="semiBold" textAlign="center">
           Pseudo classes
-        </Atom>
-        <Atom mt="2x" flex={{ direction: 'row', gap: '1x' }}>
-          <Atom
+        </AtomStyle>
+        <AtomStyle mt="2x" flex={{ direction: 'row', gap: '1x' }}>
+          <AtomStyle
             as="form"
             bg="gray90"
             flex={{ direction: 'column', gap: '1x' }}
@@ -67,13 +67,13 @@ export const App = () => {
             p="2x"
             boxSizing="border-box"
           >
-            <Atom c="white" focusWithin={{ c: 'yellow50' }} flex={{ direction: 'column', gap: '1x' }}>
-              <Atom textAlign="center">atom</Atom>
-              <Atom as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
-              <Atom as="input" placeholder="email" p="1x" focus={{ bg: 'yellow50' }} />
-            </Atom>
+            <AtomStyle c="white" focusWithin={{ c: 'yellow50' }} flex={{ direction: 'column', gap: '1x' }}>
+              <AtomStyle textAlign="center">AtomStyle</AtomStyle>
+              <AtomStyle as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
+              <AtomStyle as="input" placeholder="email" p="1x" focus={{ bg: 'yellow50' }} />
+            </AtomStyle>
 
-            <Atom
+            <AtomStyle
               textAlign="center"
               py="1x"
               c="white"
@@ -83,8 +83,8 @@ export const App = () => {
               active={{ bg: 'blue60' }}
             >
               submit
-            </Atom>
-          </Atom>
+            </AtomStyle>
+          </AtomStyle>
           <AtomStyledComponents
             as="form"
             bg="gray90"
@@ -94,7 +94,7 @@ export const App = () => {
             boxSizing="border-box"
           >
             <AtomStyledComponents c="white" focusWithin={{ c: 'yellow50' }} flex={{ direction: 'column', gap: '1x' }}>
-              <AtomStyledComponents textAlign="center">atom-styled-components</AtomStyledComponents>
+              <AtomStyledComponents textAlign="center">AtomStyle-styled-components</AtomStyledComponents>
               <AtomStyledComponents as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
               <AtomStyledComponents as="input" placeholder="email" p="1x" focus={{ bg: 'yellow50' }} />
             </AtomStyledComponents>
@@ -119,7 +119,7 @@ export const App = () => {
             boxSizing="border-box"
           >
             <AtomEmotion c="white" focusWithin={{ c: 'yellow50' }} flex={{ direction: 'column', gap: '1x' }}>
-              <AtomEmotion textAlign="center">atom-emotion</AtomEmotion>
+              <AtomEmotion textAlign="center">AtomStyle-emotion</AtomEmotion>
               <AtomEmotion as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
               <AtomEmotion as="input" placeholder="email" p="1x" focus={{ bg: 'yellow50' }} />
             </AtomEmotion>
@@ -135,8 +135,8 @@ export const App = () => {
               submit
             </AtomEmotion>
           </AtomEmotion>
-        </Atom>
-      </Atom>
-    </Atom>
+        </AtomStyle>
+      </AtomStyle>
+    </AtomStyle>
   );
 };
