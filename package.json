@@ -5,7 +5,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "publish-packages": "lerna build && lerna publish",
+    "publish-packages": "yarn build && lerna publish",
     "playground": "yarn --cwd playground start"
   },
   "workspaces": {
