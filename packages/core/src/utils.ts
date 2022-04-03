@@ -1,5 +1,4 @@
 import { CSSProperties } from 'react';
-import { ATOM_PSEUDO_CLASS_PROPS, ATOM_STYLE_PROPS } from './constants';
 import {
   AtomHtmlProps,
   AtomProps,
@@ -127,6 +126,66 @@ export const mergeStyle = (style: CSSProperties, newStyle: CSSProperties) => {
     style[newKey] = newValue;
   });
 };
+
+export const ATOM_STYLE_PROPS: Record<keyof AtomStyleProps, ParseFn> = {
+  position: defaultParser(),
+  left: spacingParser(),
+  right: spacingParser(),
+  top: spacingParser(),
+  bottom: spacingParser(),
+  flex: flexParser(),
+  flexItem: flexItemParser(),
+  grid: gridParser(),
+  gridItem: gridItemParser(),
+  w: spacingParser('width'),
+  minW: spacingParser('minWidth'),
+  maxW: spacingParser('maxWidth'),
+  h: spacingParser('height'),
+  minH: spacingParser('minHeight'),
+  maxH: spacingParser('maxHeight'),
+  m: spacingParser('margin'),
+  mx: spacingParser(['marginLeft', 'marginRight']),
+  my: spacingParser(['marginTop', 'marginBottom']),
+  ml: spacingParser('marginLeft'),
+  mr: spacingParser('marginRight'),
+  mt: spacingParser('marginTop'),
+  mb: spacingParser('marginBottom'),
+  p: spacingParser('padding'),
+  px: spacingParser(['paddingLeft', 'paddingRight']),
+  py: spacingParser(['paddingTop', 'paddingBottom']),
+  pl: spacingParser('paddingLeft'),
+  pr: spacingParser('paddingRight'),
+  pt: spacingParser('paddingTop'),
+  pb: spacingParser('paddingBottom'),
+  display: defaultParser(),
+  boxSizing: defaultParser(),
+  c: tokenParser('color', 'color'),
+  bg: tokenParser('color', 'background'),
+  fontFamily: tokenParser('fontFamily'),
+  fontSize: fontSizeParser(),
+  fontWeight: tokenParser('fontWeight'),
+  fontStyle: defaultParser(),
+  textAlign: defaultParser(),
+  textDecoration: defaultParser(),
+  textDecorationColor: defaultParser(),
+  textDecorationStyle: defaultParser(),
+  textOverflow: defaultParser(),
+  whiteSpace: defaultParser(),
+  border: tokenParser('border'),
+  borderStyle: defaultParser(),
+  borderWidth: spacingParser(),
+  borderColor: tokenParser('color'),
+  borderRadius: spacingParser(),
+  shadow: tokenParser('shadow', 'boxShadow'),
+  overflow: defaultParser(),
+  overflowX: defaultParser(),
+  overflowY: defaultParser(),
+  cursor: defaultParser(),
+  zIndex: tokenParser('zIndex'),
+};
+
+// order by priority
+export const ATOM_PSEUDO_CLASS_PROPS = ['focus', 'focusWithin', 'active', 'hover'];
 
 export const parseAtomStyleProps = (atomStyleProps: AtomStyleProps, tokens: Tokens) => {
   const style: CSSProperties = {};

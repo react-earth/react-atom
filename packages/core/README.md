@@ -1,6 +1,6 @@
 # @react-atom/core
 
-> Build your application atomic with your design!
+> Core constants, types, utils
 
 ## Install
 

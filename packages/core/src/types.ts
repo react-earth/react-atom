@@ -130,6 +130,7 @@ export type AtomPseudoClassProps<T extends Tokens = Tokens> = {
   active?: AtomStyleProps<T>;
   focus?: AtomStyleProps<T>;
   focusWithin?: AtomStyleProps<T>;
+  testKey?: AtomStyleProps<T>;
 };
 
 export type PseudoClassStyle = Partial<Record<keyof AtomPseudoClassProps, CSSProperties>>;
