@@ -18,8 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && rollup -c && rimraf dist/types",
-    "prepare": "npm run build"
+    "build": "rimraf dist && rollup -c && rimraf dist/types"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.3",
