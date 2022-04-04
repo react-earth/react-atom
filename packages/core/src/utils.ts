@@ -11,43 +11,47 @@ import {
   GridItem,
   ParseFn,
   PseudoClassStyle,
-  SpacingToken,
   Tokens,
 } from './types';
 
 export const isSet = (value: any) => value !== undefined;
 
-export const tokenParser = (tokenKey: keyof Tokens, alias?: keyof CSSProperties): ParseFn => {
-  return (key, value, tokens) => {
-    return {
-      [alias || key]: tokens[tokenKey][value],
-    };
+export const parseValue = (value: any | any[], tokens?: Tokens, tokenKey?: keyof Tokens) => {
+  const numberToPxTokenKeys: (keyof Tokens)[] = ['spacing', 'fontSize'];
+  const innerParseValue = (value: any) => {
+    if (tokens && tokenKey) {
+      if (typeof value === 'string' && value in (tokens[tokenKey] || {})) {
+        return tokens[tokenKey]?.[value];
+      } else if (typeof value === 'number' && numberToPxTokenKeys.includes(tokenKey)) {
+        return value + 'px';
+      }
+    }
+    return value;
   };
+  return Array.isArray(value) ? value.map(innerParseValue).join(' ') : innerParseValue(value);
 };
 
-export const spacingParse = (token: SpacingToken | SpacingToken[], tokens: Tokens) => {
-  const spacingItemParse = (tokenItem: SpacingToken) => {
-    if (typeof tokenItem === 'string') {
-      if (tokenItem in tokens.spacing) {
-        return tokens.spacing[tokenItem];
-      } else {
-        return tokenItem;
-      }
+export const parseGridFrValue = (token: GridFr) => (typeof token === 'number' ? `repeat(${token}, 1fr)` : token);
+
+type ParserOptions = {
+  alias?: keyof CSSProperties | (keyof CSSProperties)[];
+  tokenKey?: keyof Tokens;
+};
+export const parser = (options?: ParserOptions): ParseFn => {
+  const { alias, tokenKey } = options || {};
+
+  return (key, value, tokens) => {
+    if (Array.isArray(alias)) {
+      const result: { [key: string]: string } = {};
+      const resultValue = parseValue(value, tokens, tokenKey);
+      alias.forEach((aliasKey) => {
+        result[aliasKey] = resultValue;
+      });
+      return result;
     } else {
-      return tokenItem + 'px';
+      return { [alias || key]: parseValue(value, tokens, tokenKey) };
     }
   };
-  if (Array.isArray(token)) {
-    return token.map(spacingItemParse).join(' ');
-  } else {
-    return spacingItemParse(token);
-  }
-};
-
-export const gridFrParse = (token: GridFr) => (typeof token === 'number' ? `repeat(${token}, 1fr)` : token);
-
-export const defaultParser = (): ParseFn => {
-  return (key, value) => ({ [key]: value });
 };
 
 export const flexParser = (): ParseFn => {
@@ -57,7 +61,7 @@ export const flexParser = (): ParseFn => {
     isSet(value.direction) && (css.flexDirection = value.direction);
     isSet(value.justify) && (css.justifyContent = value.justify);
     isSet(value.align) && (css.alignItems = value.align);
-    isSet(value.gap) && (css.gap = spacingParse(value.gap, tokens));
+    isSet(value.gap) && (css.gap = parseValue(value.gap, tokens, 'spacing'));
     isSet(value.wrap) && (css.flexWrap = value.wrap);
     return css;
   };
@@ -77,11 +81,11 @@ export const gridParser = (): ParseFn => {
     const css: CSSProperties = {};
     css.display = 'grid';
     isSet(value.flow) && (css.gridAutoColumns = value.flow);
-    isSet(value.rows) && (css.gridTemplateRows = gridFrParse(value.rows));
-    isSet(value.columns) && (css.gridTemplateColumns = gridFrParse(value.columns));
+    isSet(value.rows) && (css.gridTemplateRows = parseGridFrValue(value.rows!));
+    isSet(value.columns) && (css.gridTemplateColumns = parseGridFrValue(value.columns!));
     isSet(value.justify) && (css.justifyItems = value.justify);
     isSet(value.align) && (css.alignItems = value.align);
-    isSet(value.gap) && (css.gap = spacingParse(value.gap, tokens));
+    isSet(value.gap) && (css.gap = parseValue(value.gap, tokens, 'spacing'));
     return css;
   };
 };
@@ -97,91 +101,69 @@ export const gridItemParser = (): ParseFn => {
   };
 };
 
-export const spacingParser = (alias?: keyof CSSProperties | (keyof CSSProperties)[]): ParseFn => {
-  return (key, value, tokens) => {
-    const css = {};
-    if (Array.isArray(alias)) {
-      alias.forEach((aliasItem) => {
-        css[aliasItem] = spacingParse(value, tokens);
-      });
-    } else {
-      css[alias || key] = spacingParse(value, tokens);
-    }
-    return css;
-  };
-};
-
-export const fontSizeParser = (): ParseFn => {
-  return (_key, value, tokens) => {
-    const [fontSize, lineHeight] = tokens.fontSize[value];
-    return {
-      fontSize,
-      lineHeight,
-    };
-  };
-};
-
 export const mergeStyle = (style: CSSProperties, newStyle: CSSProperties) => {
   Object.entries(newStyle).forEach(([newKey, newValue]) => {
-    style[newKey] = newValue;
+    (style as any)[newKey] = newValue;
   });
 };
 
 export const ATOM_STYLE_PROPS: Record<keyof AtomStyleProps, ParseFn> = {
-  position: defaultParser(),
-  left: spacingParser(),
-  right: spacingParser(),
-  top: spacingParser(),
-  bottom: spacingParser(),
+  position: parser(),
+  left: parser(),
+  right: parser(),
+  top: parser(),
+  bottom: parser(),
   flex: flexParser(),
   flexItem: flexItemParser(),
   grid: gridParser(),
   gridItem: gridItemParser(),
-  w: spacingParser('width'),
-  minW: spacingParser('minWidth'),
-  maxW: spacingParser('maxWidth'),
-  h: spacingParser('height'),
-  minH: spacingParser('minHeight'),
-  maxH: spacingParser('maxHeight'),
-  m: spacingParser('margin'),
-  mx: spacingParser(['marginLeft', 'marginRight']),
-  my: spacingParser(['marginTop', 'marginBottom']),
-  ml: spacingParser('marginLeft'),
-  mr: spacingParser('marginRight'),
-  mt: spacingParser('marginTop'),
-  mb: spacingParser('marginBottom'),
-  p: spacingParser('padding'),
-  px: spacingParser(['paddingLeft', 'paddingRight']),
-  py: spacingParser(['paddingTop', 'paddingBottom']),
-  pl: spacingParser('paddingLeft'),
-  pr: spacingParser('paddingRight'),
-  pt: spacingParser('paddingTop'),
-  pb: spacingParser('paddingBottom'),
-  display: defaultParser(),
-  boxSizing: defaultParser(),
-  c: tokenParser('color', 'color'),
-  bg: tokenParser('color', 'background'),
-  fontFamily: tokenParser('fontFamily'),
-  fontSize: fontSizeParser(),
-  fontWeight: tokenParser('fontWeight'),
-  fontStyle: defaultParser(),
-  textAlign: defaultParser(),
-  textDecoration: defaultParser(),
-  textDecorationColor: defaultParser(),
-  textDecorationStyle: defaultParser(),
-  textOverflow: defaultParser(),
-  whiteSpace: defaultParser(),
-  border: tokenParser('border'),
-  borderStyle: defaultParser(),
-  borderWidth: spacingParser(),
-  borderColor: tokenParser('color'),
-  borderRadius: spacingParser(),
-  shadow: tokenParser('shadow', 'boxShadow'),
-  overflow: defaultParser(),
-  overflowX: defaultParser(),
-  overflowY: defaultParser(),
-  cursor: defaultParser(),
-  zIndex: tokenParser('zIndex'),
+  w: parser({ alias: 'width', tokenKey: 'spacing' }),
+  minW: parser({ alias: 'minWidth', tokenKey: 'spacing' }),
+  maxW: parser({ alias: 'maxWidth', tokenKey: 'spacing' }),
+  h: parser({ alias: 'height', tokenKey: 'spacing' }),
+  minH: parser({ alias: 'minHeight', tokenKey: 'spacing' }),
+  maxH: parser({ alias: 'maxHeight', tokenKey: 'spacing' }),
+  m: parser({ alias: 'margin', tokenKey: 'spacing' }),
+  mx: parser({ alias: ['marginLeft', 'marginRight'], tokenKey: 'spacing' }),
+  my: parser({ alias: ['marginTop', 'marginBottom'], tokenKey: 'spacing' }),
+  ml: parser({ alias: 'marginLeft', tokenKey: 'spacing' }),
+  mr: parser({ alias: 'marginRight', tokenKey: 'spacing' }),
+  mt: parser({ alias: 'marginTop', tokenKey: 'spacing' }),
+  mb: parser({ alias: 'marginBottom', tokenKey: 'spacing' }),
+  p: parser({ alias: 'padding', tokenKey: 'spacing' }),
+  px: parser({ alias: ['paddingLeft', 'paddingRight'], tokenKey: 'spacing' }),
+  py: parser({ alias: ['paddingTop', 'paddingBottom'], tokenKey: 'spacing' }),
+  pl: parser({ alias: 'paddingLeft', tokenKey: 'spacing' }),
+  pr: parser({ alias: 'paddingRight', tokenKey: 'spacing' }),
+  pt: parser({ alias: 'paddingTop', tokenKey: 'spacing' }),
+  pb: parser({ alias: 'paddingBottom', tokenKey: 'spacing' }),
+  display: parser(),
+  boxSizing: parser(),
+  c: parser({ alias: 'color', tokenKey: 'color' }),
+  bg: parser({ alias: 'background', tokenKey: 'color' }),
+  fontFamily: parser({ tokenKey: 'fontFamily' }),
+  fontSize: parser({ tokenKey: 'fontSize' }),
+  lineHeight: parser({ tokenKey: 'lineHeight' }),
+  fontWeight: parser({ tokenKey: 'fontWeight' }),
+  fontStyle: parser(),
+  textAlign: parser(),
+  textTransform: parser(),
+  textDecoration: parser(),
+  textDecorationColor: parser(),
+  textDecorationStyle: parser(),
+  textOverflow: parser(),
+  whiteSpace: parser(),
+  border: parser({ tokenKey: 'border' }),
+  borderStyle: parser(),
+  borderWidth: parser(),
+  borderColor: parser({ tokenKey: 'color' }),
+  borderRadius: parser(),
+  shadow: parser({ alias: 'boxShadow', tokenKey: 'shadow' }),
+  overflow: parser(),
+  overflowX: parser(),
+  overflowY: parser(),
+  cursor: parser(),
+  zIndex: parser({ tokenKey: 'zIndex' }),
 };
 
 // order by priority
@@ -191,7 +173,7 @@ export const parseAtomStyleProps = (atomStyleProps: AtomStyleProps, tokens: Toke
   const style: CSSProperties = {};
   Object.entries(atomStyleProps).forEach(([key, value]) => {
     if (isSet(value)) {
-      mergeStyle(style, ATOM_STYLE_PROPS[key](key, value, tokens));
+      mergeStyle(style, (ATOM_STYLE_PROPS as any)[key](key, value, tokens));
     }
   });
   return style;
@@ -204,17 +186,17 @@ export const parseAtomProps = (atomProps: AtomProps, tokens: Tokens) => {
   // split props
   Object.entries(atomProps).forEach(([key, value]) => {
     if (key in ATOM_STYLE_PROPS) {
-      atomStyleProps[key] = value;
+      (atomStyleProps as any)[key] = value;
     } else if (ATOM_PSEUDO_CLASS_PROPS.includes(key)) {
-      atomPseudoClassProps[key] = value;
+      (atomPseudoClassProps as any)[key] = value;
     } else {
-      htmlProps[key] = value;
+      (htmlProps as any)[key] = value;
     }
   });
   const style = parseAtomStyleProps(atomStyleProps, tokens);
   const pseudoClassStyle: PseudoClassStyle = {};
   Object.entries(atomPseudoClassProps).forEach(([key, value]) => {
-    pseudoClassStyle[key] = parseAtomStyleProps(value, tokens);
+    (pseudoClassStyle as any)[key] = parseAtomStyleProps(value, tokens);
   });
   return { style, pseudoClassStyle, htmlProps };
 };

@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "watch": "lerna run watch --stream",
     "build": "lerna run build",
     "publish-packages": "yarn build && lerna publish",
-    "playground": "yarn --cwd playground start"
+    "examples": "yarn --cwd examples start"
   },
   "workspaces": {
     "packages": [

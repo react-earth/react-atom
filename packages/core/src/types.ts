@@ -1,28 +1,29 @@
 import { CSSProperties, ElementType, HTMLProps } from 'react';
 
-type StringTokenKeys = { [key: string]: string };
-type NumberTokenKeys = { [key: string]: number };
-type FontSizeTokenKeys = { [key: string]: string[] };
+type TokenKeys = { [key: string]: string | number };
 
 export type Tokens = {
-  color?: StringTokenKeys;
-  spacing?: StringTokenKeys;
-  fontFamily?: StringTokenKeys;
-  fontSize?: FontSizeTokenKeys;
-  fontWeight?: NumberTokenKeys;
-  border?: StringTokenKeys;
-  shadow?: StringTokenKeys;
-  zIndex?: NumberTokenKeys;
+  color?: TokenKeys;
+  spacing?: TokenKeys;
+  fontFamily?: TokenKeys;
+  fontSize?: TokenKeys;
+  fontWeight?: TokenKeys;
+  lineHeight?: TokenKeys;
+  border?: TokenKeys;
+  shadow?: TokenKeys;
+  zIndex?: TokenKeys;
 };
 
-export type SpacingToken<T extends Tokens = Tokens> = keyof T['spacing'] | number | (string & {});
-export type ColorToken<T extends Tokens> = keyof T['color'];
-export type FontFamilyToken<T extends Tokens> = keyof T['fontFamily'];
-export type FontSizeToken<T extends Tokens> = keyof T['fontSize'];
-export type FontWeightToken<T extends Tokens> = keyof T['fontWeight'];
-export type BorderToken<T extends Tokens> = keyof T['border'];
-export type ShadowToken<T extends Tokens> = keyof T['shadow'];
-export type ZIndexToken<T extends Tokens> = keyof T['zIndex'];
+export type CustomString = string & {};
+export type SpacingToken<T extends Tokens = Tokens> = keyof T['spacing'] | number | CustomString;
+export type ColorToken<T extends Tokens> = keyof T['color'] | CustomString;
+export type FontFamilyToken<T extends Tokens> = keyof T['fontFamily'] | CustomString;
+export type FontSizeToken<T extends Tokens> = keyof T['fontSize'] | number | CustomString;
+export type FontWeightToken<T extends Tokens> = keyof T['fontWeight'] | number | CustomString;
+export type lineHeightToken<T extends Tokens> = keyof T['lineHeight'] | number | CustomString;
+export type BorderToken<T extends Tokens> = keyof T['border'] | CustomString;
+export type ShadowToken<T extends Tokens> = keyof T['shadow'] | CustomString;
+export type ZIndexToken<T extends Tokens> = keyof T['zIndex'] | number | CustomString;
 
 export type Flex<T = Tokens> = {
   direction?: CSSProperties['flexDirection'];
@@ -102,9 +103,11 @@ export type AtomStyleProps<T extends Tokens = Tokens> = {
   // text
   fontFamily?: FontFamilyToken<T>;
   fontSize?: FontSizeToken<T>;
+  lineHeight?: lineHeightToken<T>;
   fontWeight?: FontWeightToken<T>;
   fontStyle?: CSSProperties['fontStyle'];
   textAlign?: CSSProperties['textAlign'];
+  textTransform?: CSSProperties['textTransform'];
   textDecoration?: CSSProperties['textDecoration'];
   textDecorationColor?: ColorToken<T>;
   textDecorationStyle?: CSSProperties['textDecorationStyle'];
@@ -130,7 +133,6 @@ export type AtomPseudoClassProps<T extends Tokens = Tokens> = {
   active?: AtomStyleProps<T>;
   focus?: AtomStyleProps<T>;
   focusWithin?: AtomStyleProps<T>;
-  testKey?: AtomStyleProps<T>;
 };
 
 export type PseudoClassStyle = Partial<Record<keyof AtomPseudoClassProps, CSSProperties>>;
