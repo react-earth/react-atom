@@ -7,25 +7,27 @@
 Using npm:
 
 ```sh
-npm install @react-atom/atom
+# base on react build-in style
+npm install @react-atom/style
 
 # base on styled-components
-npm install @react-atom/atom-styled-components
+npm install @react-atom/styled-components
 
 # base on emotion
-npm install @react-atom/atom-emotion
+npm install @react-atom/emotion
 ```
 
 or using yarn:
 
 ```sh
-yarn add @react-atom/atom
+# base on react build-in style
+yarn add @react-atom/style
 
 # base on styled-components
-yarn add @react-atom/atom-styled-components
+yarn add @react-atom/styled-components
 
 # base on emotion
-yarn add @react-atom/atom-emotion
+yarn add @react-atom/emotion
 ```
 
 ## Use official tokens (optional)
@@ -47,13 +49,14 @@ yarn add @react-atom/tokens
 Create you Atom component
 
 ```typescript
-import atom from '@react-atom/atom';
+// base on react build-in style
+import atom from '@react-atom/style';
 
 // base on styled-components
-import atom from '@react-atom/atom-styled-components';
+import atom from '@react-atom/styled-components';
 
 // base on emotion
-import atom from '@react-atom/atom-emotion';
+import atom from '@react-atom/emotion';
 
 // official token
 import tokens from '@react-atom/tokens';
