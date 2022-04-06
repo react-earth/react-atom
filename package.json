@@ -6,7 +6,7 @@
     "bootstrap": "lerna bootstrap",
     "watch": "lerna run watch --stream",
     "build": "lerna run build",
-    "publish-packages": "yarn build && lerna publish",
+    "publish-packages": "yarn build && lerna publish -m \"chore: publish packages\"",
     "examples": "yarn --cwd examples start"
   },
   "workspaces": {
