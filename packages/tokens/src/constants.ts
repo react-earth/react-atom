@@ -1,4 +1,4 @@
-export const COLORS = {
+export const PALETTE = {
   gray10: '#f9fafb',
   gray20: '#f3f4f6',
   gray30: '#e5e7eb',

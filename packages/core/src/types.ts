@@ -113,13 +113,12 @@ export type AtomStyleProps<T extends Tokens = Tokens> = {
   textDecorationStyle?: CSSProperties['textDecorationStyle'];
   textOverflow?: CSSProperties['textOverflow'];
   whiteSpace?: CSSProperties['whiteSpace'];
-  // border & shadow
+  // border
   border?: BorderToken<T>;
   borderStyle?: CSSProperties['borderStyle'];
   borderWidth?: SpacingToken<T>;
   borderColor?: ColorToken<T>;
   borderRadius?: SpacingToken<T>;
-  shadow?: ShadowToken<T>;
   // other
   overflow?: CSSProperties['overflow'];
   overflowX?: CSSProperties['overflowX'];
