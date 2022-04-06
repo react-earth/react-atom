@@ -13,7 +13,6 @@ export default [
       {
         file: packageJson.main,
         format: 'cjs',
-        exports: 'default',
       },
       {
         file: packageJson.module,
