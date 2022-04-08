@@ -7,8 +7,8 @@ export type Tokens = {
   spacing?: TokenKeys;
   fontFamily?: TokenKeys;
   fontSize?: TokenKeys;
-  fontWeight?: TokenKeys;
   lineHeight?: TokenKeys;
+  fontWeight?: TokenKeys;
   border?: TokenKeys;
   shadow?: TokenKeys;
   zIndex?: TokenKeys;
