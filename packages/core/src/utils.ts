@@ -163,6 +163,7 @@ export const ATOM_STYLE_PROPS: Record<keyof AtomStyleProps, ParseFn> = {
   overflowY: parser(),
   cursor: parser(),
   zIndex: parser({ tokenKey: 'zIndex' }),
+  opacity: parser(),
 };
 
 // order by priority

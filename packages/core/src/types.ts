@@ -125,6 +125,7 @@ export type AtomStyleProps<T extends Tokens = Tokens> = {
   overflowY?: CSSProperties['overflowY'];
   cursor?: CSSProperties['cursor'];
   zIndex?: ZIndexToken<T>;
+  opacity?: CSSProperties['opacity'];
 };
 
 export type AtomPseudoClassProps<T extends Tokens = Tokens> = {
