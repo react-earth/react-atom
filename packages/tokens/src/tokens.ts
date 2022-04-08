@@ -71,9 +71,8 @@ const spacing = {
 
 const border = {
   default: `solid ${spacing.border} ${color.border}`,
-  focus: `solid ${spacing.border} ${color.primary}`,
+  primary: `solid ${spacing.border} ${color.primary}`,
   danger: `solid ${spacing.border} ${color.danger}`,
-  none: `none`,
 };
 
 const zIndex = {
