@@ -155,7 +155,7 @@ export const ATOM_STYLE_PROPS: Record<keyof AtomStyleProps, ParseFn> = {
   whiteSpace: parser(),
   border: parser({ tokenKey: 'border' }),
   borderStyle: parser(),
-  borderWidth: parser(),
+  borderWidth: parser({ tokenKey: 'spacing' }),
   borderColor: parser({ tokenKey: 'color' }),
   borderRadius: parser(),
   overflow: parser(),
