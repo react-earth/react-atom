@@ -109,10 +109,10 @@ export const mergeStyle = (style: CSSProperties, newStyle: CSSProperties) => {
 
 export const ATOM_STYLE_PROPS: Record<keyof AtomStyleProps, ParseFn> = {
   position: parser(),
-  left: parser(),
-  right: parser(),
-  top: parser(),
-  bottom: parser(),
+  left: parser({ tokenKey: 'spacing' }),
+  right: parser({ tokenKey: 'spacing' }),
+  top: parser({ tokenKey: 'spacing' }),
+  bottom: parser({ tokenKey: 'spacing' }),
   flex: flexParser(),
   flexItem: flexItemParser(),
   grid: gridParser(),
