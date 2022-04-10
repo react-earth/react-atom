@@ -1,6 +1,6 @@
 {
   "name": "@react-atom/core",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/react-atom/react-atom.git"
