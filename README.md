@@ -1,6 +1,6 @@
 # React Atom
 
-> Next generation atomization framework, Build application atomic with you design ❤
+> Next generation atomization framework, build application atomic with you design ❤
 
 | Package                       | Version                                                                | Size                                                                              |
 | ----------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
