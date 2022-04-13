@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, forwardRef } from 'react';
 import {
   AtomProps,
   ATOM_PSEUDO_CLASS_PROPS,
@@ -17,11 +17,11 @@ const parseStyle = (style: CSSProperties) =>
     .join('');
 
 export const atom = <T extends Tokens = Tokens>(tokens: T) => {
-  return (props: AtomProps<T>) => {
+  return forwardRef<HTMLElement, AtomProps<T>>((props, ref) => {
     const { as: Component = DEFAULT_COMPONENT, ...rest } = props;
     const { style, pseudoClassStyle, htmlProps } = parseAtomProps(rest as AtomProps, tokens);
-    return <StyledAtom as={Component} $style={style} $pseudoClassStyle={pseudoClassStyle} {...htmlProps} />;
-  };
+    return <StyledAtom as={Component} $style={style} ref={ref} $pseudoClassStyle={pseudoClassStyle} {...htmlProps} />;
+  });
 };
 
 const StyledAtom = styled.section<{ $style: CSSProperties; $pseudoClassStyle: PseudoClassStyle }>`
