@@ -80,7 +80,7 @@ export const gridParser = (): ParseFn => {
   return (_key, value: Grid, tokens) => {
     const css: CSSProperties = {};
     css.display = 'grid';
-    isSet(value.flow) && (css.gridAutoColumns = value.flow);
+    isSet(value.flow) && (css.gridAutoFlow = value.flow);
     isSet(value.rows) && (css.gridTemplateRows = parseGridFrValue(value.rows!));
     isSet(value.columns) && (css.gridTemplateColumns = parseGridFrValue(value.columns!));
     isSet(value.justify) && (css.justifyItems = value.justify);

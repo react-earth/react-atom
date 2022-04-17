@@ -55,13 +55,6 @@ export type GridItem = {
   align?: CSSProperties['alignSelf'];
 };
 
-export type Layout<T = Tokens> = {
-  flex?: Flex<T>;
-  flexItem?: FlexItem;
-  grid?: Grid<T>;
-  gridItem?: GridItem;
-};
-
 export type AtomStyleProps<T extends Tokens = Tokens> = {
   // position
   position?: CSSProperties['position'];
