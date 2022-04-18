@@ -1,141 +1,52 @@
 import React from 'react';
-import { AtomStyle } from './components/AtomStyle';
-import { AtomEmotion } from './components/AtomEmotion';
-import { AtomStyledComponents } from './components/AtomStyledComponents';
+import { Atom } from './Atom';
 
 export const App = () => {
   return (
-    <AtomStyle
+    <Atom
       bg="gray80"
       h="heightFull"
-      fontFamily="sans"
-      p="2x"
+      p="4x"
       boxSizing="border-box"
-      flex={{ direction: 'column', gap: '3x' }}
+      fontFamily="default"
+      fontSize="default"
+      lineHeight="default"
+      flex
+      flexDirection="column"
+      gap="3x"
     >
-      <AtomStyle>
-        <AtomStyle fontSize="title1" c="white" fontWeight="semiBold" textAlign="center">
-          Flex layout
-        </AtomStyle>
-        <AtomStyle mt="2x" flex={{ direction: 'row', gap: '1x' }}>
-          <AtomStyle flexItem={{ grow: 1 }} p="3x" c="white" bg="blue50" boxSizing="border-box" textAlign="center">
-            atom-style
-          </AtomStyle>
-          <AtomStyledComponents p="3x" c="white" bg="amber50" boxSizing="border-box" textAlign="center">
-            atom-styled-components
-          </AtomStyledComponents>
-          <AtomEmotion p="3x" c="white" bg="pink50" boxSizing="border-box" textAlign="center">
-            atom-emotion
-          </AtomEmotion>
-        </AtomStyle>
-      </AtomStyle>
-      <AtomStyle>
-        <AtomStyle fontSize="title1" c="white" fontWeight="semiBold" textAlign="center">
-          Grid layout
-        </AtomStyle>
-        <AtomStyle mt="2x" grid={{ columns: 4, gap: '1x' }}>
-          <AtomStyledComponents p="3x" c="white" bg="amber50" boxSizing="border-box" textAlign="center">
-            atom-styled-components
-          </AtomStyledComponents>
-          <AtomStyle p="3x" gridItem={{ span: 2, rows: 2 }} c="white" bg="blue50" boxSizing="border-box">
-            <AtomStyle flex={{ justify: 'center', align: 'center' }} w="fill" h="fill">
-              atom-style
-            </AtomStyle>
-          </AtomStyle>
-          <AtomStyledComponents p="3x" c="white" bg="amber50" boxSizing="border-box" textAlign="center">
-            atom-styled-components
-          </AtomStyledComponents>
-          <AtomEmotion p="3x" c="white" bg="pink50" boxSizing="border-box" textAlign="center">
-            atom-emotion
-          </AtomEmotion>
-          <AtomEmotion p="3x" c="white" bg="pink50" boxSizing="border-box" textAlign="center">
-            atom-emotion
-          </AtomEmotion>
-        </AtomStyle>
-      </AtomStyle>
-      <AtomStyle>
-        <AtomStyle fontSize="title1" c="white" fontWeight="semiBold" textAlign="center">
-          Pseudo classes
-        </AtomStyle>
-        <AtomStyle mt="2x" flex={{ direction: 'row', gap: '1x' }}>
-          <AtomStyle
-            as="form"
-            bg="gray90"
-            flex={{ direction: 'column', gap: '1x' }}
-            flexItem={{ grow: 1 }}
-            p="2x"
-            boxSizing="border-box"
-          >
-            <AtomStyle c="white" focusWithin={{ c: 'yellow50' }} flex={{ direction: 'column', gap: '1x' }}>
-              <AtomStyle textAlign="center">atom-style</AtomStyle>
-              <AtomStyle as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
-              <AtomStyle as="input" placeholder="email" p="1x" focus={{ bg: 'yellow50' }} />
-            </AtomStyle>
-
-            <AtomStyle
-              textAlign="center"
-              py="1x"
-              c="white"
-              bg="gray50"
-              cursor="pointer"
-              hover={{ bg: 'blue50' }}
-              active={{ bg: 'blue60' }}
-            >
-              submit
-            </AtomStyle>
-          </AtomStyle>
-          <AtomStyledComponents
-            as="form"
-            bg="gray90"
-            flex={{ direction: 'column', gap: '1x' }}
-            flexItem={{ grow: 1 }}
-            p="2x"
-            boxSizing="border-box"
-          >
-            <AtomStyledComponents c="white" focusWithin={{ c: 'yellow50' }} flex={{ direction: 'column', gap: '1x' }}>
-              <AtomStyledComponents textAlign="center">atom-styled-components</AtomStyledComponents>
-              <AtomStyledComponents as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
-              <AtomStyledComponents as="input" placeholder="email" p="1x" focus={{ bg: 'yellow50' }} />
-            </AtomStyledComponents>
-            <AtomStyledComponents
-              textAlign="center"
-              py="1x"
-              c="white"
-              bg="gray50"
-              cursor="pointer"
-              hover={{ bg: 'blue50' }}
-              active={{ bg: 'blue60' }}
-            >
-              submit
-            </AtomStyledComponents>
-          </AtomStyledComponents>
-          <AtomEmotion
-            as="form"
-            bg="gray90"
-            flex={{ direction: 'column', gap: '1x' }}
-            flexItem={{ grow: 1 }}
-            p="2x"
-            boxSizing="border-box"
-          >
-            <AtomEmotion c="white" focusWithin={{ c: 'yellow50' }} flex={{ direction: 'column', gap: '1x' }}>
-              <AtomEmotion textAlign="center">atom-emotion</AtomEmotion>
-              <AtomEmotion as="input" mt="1x" placeholder="username" p="1x" focus={{ bg: 'yellow50' }} />
-              <AtomEmotion as="input" placeholder="email" p="1x" focus={{ bg: 'yellow50' }} />
-            </AtomEmotion>
-            <AtomEmotion
-              textAlign="center"
-              py="1x"
-              c="white"
-              bg="gray50"
-              cursor="pointer"
-              hover={{ bg: 'blue50' }}
-              active={{ bg: 'blue60' }}
-            >
-              submit
-            </AtomEmotion>
-          </AtomEmotion>
-        </AtomStyle>
-      </AtomStyle>
-    </AtomStyle>
+      <Atom fontSize="h4" c="white" fontWeight="semiBold" textAlign="center">
+        Font
+      </Atom>
+      <Atom flex flexDirection="column" gap="1x" c="white" textAlign="center">
+        <Atom fontSize="h1">A JavaScript library for building user interfaces</Atom>
+        <Atom fontSize="h2">A JavaScript library for building user interfaces</Atom>
+        <Atom fontSize="h3">A JavaScript library for building user interfaces</Atom>
+        <Atom fontSize="h4">A JavaScript library for building user interfaces</Atom>
+        <Atom fontSize="h5">A JavaScript library for building user interfaces</Atom>
+        <Atom fontSize="body1">A JavaScript library for building user interfaces</Atom>
+        <Atom fontSize="body2">A JavaScript library for building user interfaces</Atom>
+        <Atom fontSize="body3">A JavaScript library for building user interfaces</Atom>
+        <Atom fontSize="tiny">A JavaScript library for building user interfaces</Atom>
+      </Atom>
+      <Atom fontSize="h4" c="white" fontWeight="semiBold" textAlign="center">
+        Flex Layout
+      </Atom>
+      <Atom flex gap="2x" w="fill">
+        <Atom flexGrow="1" h="8x" c="white" bg="blue50" />
+        <Atom w="8x" h="8x" c="white" bg="amber50" />
+        <Atom w="8x" h="8x" c="white" bg="pink50" />
+      </Atom>
+      <Atom fontSize="h4" c="white" fontWeight="semiBold" textAlign="center">
+        Grid Layout
+      </Atom>
+      <Atom grid gridColumns={4} gridRows={2} gap="2x">
+        <Atom h="8x" bg="amber50" />
+        <Atom gridSelfColumns={2} gridSelfRows={2} bg="blue50" />
+        <Atom h="8x" bg="amber50" />
+        <Atom h="8x" bg="pink50" />
+        <Atom h="8x" bg="pink50" />
+      </Atom>
+    </Atom>
   );
 };

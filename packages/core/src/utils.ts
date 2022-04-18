@@ -1,28 +1,32 @@
+import { CSS_PROPERTIES, CSS_SPACING_PROPERTIES, CSS_COLOR_PROPERTIES } from './constants';
 import { CSSProperties } from 'react';
 import {
+  AtomCustomStyleProps,
   AtomHtmlProps,
   AtomProps,
   AtomPseudoClassProps,
   AtomStyleProps,
-  Flex,
-  FlexItem,
-  Grid,
-  GridFr,
-  GridItem,
-  ParseFn,
   PseudoClassStyle,
   Tokens,
 } from './types';
 
-export const isSet = (value: any) => value !== undefined;
+type ParseFn = (key: string, value: any, tokens: Tokens) => CSSProperties;
 
-export const parseValue = (value: any | any[], tokens?: Tokens, tokenKey?: keyof Tokens) => {
-  const numberToPxTokenKeys: (keyof Tokens)[] = ['spacing', 'fontSize'];
+const isSet = (value: any) => value !== undefined && value !== false;
+
+export const mergeStyle = (style: CSSProperties, newStyle: CSSProperties) => {
+  Object.entries(newStyle).forEach(([newKey, newValue]) => {
+    (style as any)[newKey] = newValue;
+  });
+};
+
+const parseValue = (value: any | any[], tokens?: Tokens, tokenKey?: keyof Tokens) => {
   const innerParseValue = (value: any) => {
     if (tokens && tokenKey) {
       if (typeof value === 'string' && value in (tokens[tokenKey] || {})) {
         return tokens[tokenKey]?.[value];
-      } else if (typeof value === 'number' && numberToPxTokenKeys.includes(tokenKey)) {
+      } else if (typeof value === 'number' && tokenKey === 'spacing') {
+        // if is spacing, auto add px
         return value + 'px';
       }
     }
@@ -31,92 +35,33 @@ export const parseValue = (value: any | any[], tokens?: Tokens, tokenKey?: keyof
   return Array.isArray(value) ? value.map(innerParseValue).join(' ') : innerParseValue(value);
 };
 
-export const parseGridFrValue = (token: GridFr) => (typeof token === 'number' ? `repeat(${token}, 1fr)` : token);
-
 type ParserOptions = {
   alias?: keyof CSSProperties | (keyof CSSProperties)[];
   tokenKey?: keyof Tokens;
+  style?: CSSProperties;
+  transform?: (value: any) => string;
 };
-export const parser = (options?: ParserOptions): ParseFn => {
-  const { alias, tokenKey } = options || {};
+const parser = (options?: ParserOptions): ParseFn => {
+  const { alias, tokenKey, style, transform } = options || {};
 
   return (key, value, tokens) => {
+    if (style) {
+      return style;
+    }
+    const parsedValue = transform ? transform(value) : parseValue(value, tokens, tokenKey);
     if (Array.isArray(alias)) {
       const result: { [key: string]: string } = {};
-      const resultValue = parseValue(value, tokens, tokenKey);
       alias.forEach((aliasKey) => {
-        result[aliasKey] = resultValue;
+        result[aliasKey] = parsedValue;
       });
       return result;
     } else {
-      return { [alias || key]: parseValue(value, tokens, tokenKey) };
+      return { [alias || key]: parsedValue };
     }
   };
 };
 
-export const flexParser = (): ParseFn => {
-  return (_key, value: Flex, tokens) => {
-    const css: CSSProperties = {};
-    css.display = 'flex';
-    isSet(value.direction) && (css.flexDirection = value.direction);
-    isSet(value.justify) && (css.justifyContent = value.justify);
-    isSet(value.align) && (css.alignItems = value.align);
-    isSet(value.gap) && (css.gap = parseValue(value.gap, tokens, 'spacing'));
-    isSet(value.wrap) && (css.flexWrap = value.wrap);
-    return css;
-  };
-};
-
-export const flexItemParser = (): ParseFn => {
-  return (_key, value: FlexItem) => {
-    const css: CSSProperties = {};
-    isSet(value.grow) && (css.flexGrow = value.grow);
-    isSet(value.shrink) && (css.flexShrink = value.shrink);
-    return css;
-  };
-};
-
-export const gridParser = (): ParseFn => {
-  return (_key, value: Grid, tokens) => {
-    const css: CSSProperties = {};
-    css.display = 'grid';
-    isSet(value.flow) && (css.gridAutoFlow = value.flow);
-    isSet(value.rows) && (css.gridTemplateRows = parseGridFrValue(value.rows!));
-    isSet(value.columns) && (css.gridTemplateColumns = parseGridFrValue(value.columns!));
-    isSet(value.justify) && (css.justifyItems = value.justify);
-    isSet(value.align) && (css.alignItems = value.align);
-    isSet(value.gap) && (css.gap = parseValue(value.gap, tokens, 'spacing'));
-    return css;
-  };
-};
-
-export const gridItemParser = (): ParseFn => {
-  return (_key, value: GridItem) => {
-    const css: CSSProperties = {};
-    isSet(value.span) && (css.gridColumnEnd = `span ${value.span}`);
-    isSet(value.rows) && (css.gridRowEnd = `span ${value.rows}`);
-    isSet(value.justify) && (css.justifySelf = value.justify);
-    isSet(value.align) && (css.alignSelf = value.align);
-    return css;
-  };
-};
-
-export const mergeStyle = (style: CSSProperties, newStyle: CSSProperties) => {
-  Object.entries(newStyle).forEach(([newKey, newValue]) => {
-    (style as any)[newKey] = newValue;
-  });
-};
-
-export const ATOM_STYLE_PROPS: Record<keyof AtomStyleProps, ParseFn> = {
-  position: parser(),
-  left: parser({ tokenKey: 'spacing' }),
-  right: parser({ tokenKey: 'spacing' }),
-  top: parser({ tokenKey: 'spacing' }),
-  bottom: parser({ tokenKey: 'spacing' }),
-  flex: flexParser(),
-  flexItem: flexItemParser(),
-  grid: gridParser(),
-  gridItem: gridItemParser(),
+const CSS_CUSTOM_PROPERTIES_HANDLE: { [key in keyof AtomCustomStyleProps<Tokens>]: ParseFn } = {
   w: parser({ alias: 'width', tokenKey: 'spacing' }),
   minW: parser({ alias: 'minWidth', tokenKey: 'spacing' }),
   maxW: parser({ alias: 'maxWidth', tokenKey: 'spacing' }),
@@ -137,43 +82,39 @@ export const ATOM_STYLE_PROPS: Record<keyof AtomStyleProps, ParseFn> = {
   pr: parser({ alias: 'paddingRight', tokenKey: 'spacing' }),
   pt: parser({ alias: 'paddingTop', tokenKey: 'spacing' }),
   pb: parser({ alias: 'paddingBottom', tokenKey: 'spacing' }),
-  display: parser(),
-  boxSizing: parser(),
   c: parser({ alias: 'color', tokenKey: 'color' }),
   bg: parser({ alias: 'background', tokenKey: 'color' }),
-  fontFamily: parser({ tokenKey: 'fontFamily' }),
-  fontSize: parser({ tokenKey: 'fontSize' }),
-  lineHeight: parser({ tokenKey: 'lineHeight' }),
-  fontWeight: parser({ tokenKey: 'fontWeight' }),
-  fontStyle: parser(),
-  textAlign: parser(),
-  textTransform: parser(),
-  textDecoration: parser(),
-  textDecorationColor: parser(),
-  textDecorationStyle: parser(),
-  textOverflow: parser(),
-  whiteSpace: parser(),
-  border: parser({ tokenKey: 'border' }),
-  borderStyle: parser(),
-  borderWidth: parser({ tokenKey: 'spacing' }),
-  borderColor: parser({ tokenKey: 'color' }),
-  borderRadius: parser({ tokenKey: 'spacing' }),
-  overflow: parser(),
-  overflowX: parser(),
-  overflowY: parser(),
-  cursor: parser(),
-  zIndex: parser({ tokenKey: 'zIndex' }),
-  opacity: parser(),
+  flex: parser({ style: { display: 'flex' } }),
+  flexJustify: parser({ alias: 'justifyContent' }),
+  flexAlign: parser({ alias: 'alignItems' }),
+  grid: parser({ style: { display: 'grid' } }),
+  gridColumns: parser({ alias: 'gridTemplateColumns', transform: (value) => `repeat(${value}, 1fr)` }),
+  gridRows: parser({ alias: 'gridTemplateRows', transform: (value) => `repeat(${value}, 1fr)` }),
+  gridJustify: parser({ alias: 'justifyItems' }),
+  gridAlign: parser({ alias: 'alignItems' }),
+  gridSelfColumns: parser({ alias: 'gridColumnEnd', transform: (value) => `span ${value}` }),
+  gridSelfRows: parser({ alias: 'gridRowEnd', transform: (value) => `span ${value}` }),
+  gridSelfJustify: parser({ alias: 'justifySelf' }),
+  gridSelfAlign: parser({ alias: 'alignSelf' }),
 };
 
+const ATOM_ALL_STYLE_PROPS = [...CSS_PROPERTIES, ...Object.keys(CSS_CUSTOM_PROPERTIES_HANDLE)];
 // order by priority
 export const ATOM_PSEUDO_CLASS_PROPS = ['focus', 'focusWithin', 'active', 'hover'];
 
-export const parseAtomStyleProps = (atomStyleProps: AtomStyleProps, tokens: Tokens) => {
+const parseAtomStyleProps = (atomStyleProps: AtomStyleProps<Tokens>, tokens: Tokens) => {
   const style: CSSProperties = {};
   Object.entries(atomStyleProps).forEach(([key, value]) => {
     if (isSet(value)) {
-      mergeStyle(style, (ATOM_STYLE_PROPS as any)[key](key, value, tokens));
+      if (CSS_SPACING_PROPERTIES.includes(key as any)) {
+        mergeStyle(style, parser({ tokenKey: 'spacing' })(key, value, tokens));
+      } else if (CSS_COLOR_PROPERTIES.includes(key as any)) {
+        mergeStyle(style, parser({ tokenKey: 'color' })(key, value, tokens));
+      } else if (key in CSS_CUSTOM_PROPERTIES_HANDLE) {
+        mergeStyle(style, (CSS_CUSTOM_PROPERTIES_HANDLE as any)[key](key, value, tokens));
+      } else {
+        mergeStyle(style, parser({ tokenKey: key as any })(key, value, tokens));
+      }
     }
   });
   return style;
@@ -183,9 +124,8 @@ export const parseAtomProps = (atomProps: AtomProps, tokens: Tokens) => {
   const atomStyleProps: AtomStyleProps = {};
   const atomPseudoClassProps: AtomPseudoClassProps = {};
   const htmlProps: AtomHtmlProps = {};
-  // split props
   Object.entries(atomProps).forEach(([key, value]) => {
-    if (key in ATOM_STYLE_PROPS) {
+    if (ATOM_ALL_STYLE_PROPS.includes(key)) {
       (atomStyleProps as any)[key] = value;
     } else if (ATOM_PSEUDO_CLASS_PROPS.includes(key)) {
       (atomPseudoClassProps as any)[key] = value;

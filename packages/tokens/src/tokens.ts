@@ -5,12 +5,11 @@ const fontFamily = {
 };
 
 const fontSize = {
-  large1: '50px',
-  large2: '42px',
-  large3: '36px',
-  title1: '24px',
-  title2: '20px',
-  title3: '18px',
+  h1: '36px',
+  h2: '32px',
+  h3: '28px',
+  h4: '24px',
+  h5: '20px',
   body1: '16px',
   body2: '14px',
   body3: '12px',
