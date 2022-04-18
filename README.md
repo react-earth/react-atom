@@ -92,7 +92,7 @@ Build you application atomic!
 
 ```typescript
 const App = () => {
-  <Atom flex={{gap: '1x'}}>
+  <Atom flex flexGap="1x">
     <Atom w="8x" h="8x" bg="red50"/>
     <Atom w="8x" h="8x" bg="green50"/>
     <Atom w="8x" h="8x" bg="blue50"/>
