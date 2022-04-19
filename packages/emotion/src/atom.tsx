@@ -17,14 +17,14 @@ const parseStyle = (style: CSSProperties) =>
     .join('');
 
 export const atom = <T extends Tokens = Tokens>(tokens: T) => {
-  return forwardRef<HTMLElement, AtomProps<T>>((props, ref) => {
+  return forwardRef<any, AtomProps<T>>((props, ref) => {
     const { as: Component = DEFAULT_COMPONENT, ...rest } = props;
     const { style, pseudoClassStyle, htmlProps } = parseAtomProps(rest as AtomProps, tokens);
     return <StyledAtom as={Component} $style={style} $pseudoClassStyle={pseudoClassStyle} ref={ref} {...htmlProps} />;
   });
 };
 
-const StyledAtom = styled.section<{ $style: CSSProperties; $pseudoClassStyle: PseudoClassStyle }>`
+const StyledAtom = styled.div<{ $style: CSSProperties; $pseudoClassStyle: PseudoClassStyle }>`
   ${({ $style }) => parseStyle($style)}
   ${({ $pseudoClassStyle }) => {
     return Object.entries($pseudoClassStyle)

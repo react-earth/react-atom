@@ -2,7 +2,7 @@ import React, { forwardRef, useState } from 'react';
 import { AtomProps, DEFAULT_COMPONENT, mergeStyle, parseAtomProps, Tokens } from '@react-atom/core';
 
 export const atom = <T extends Tokens = Tokens>(tokens: T) => {
-  return forwardRef<HTMLElement, AtomProps<T>>((props, ref) => {
+  return forwardRef<any, AtomProps<T>>((props, ref) => {
     const { as: Component = DEFAULT_COMPONENT, ...rest } = props;
     const { style, pseudoClassStyle, htmlProps } = parseAtomProps(rest as AtomProps, tokens);
 
