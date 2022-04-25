@@ -19,7 +19,8 @@
   ],
   "scripts": {
     "watch": "rollup -c -w",
-    "build": "rimraf dist && rollup -c && rimraf dist/types"
+    "build": "rimraf dist && rollup -c && rimraf dist/types",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.3",
