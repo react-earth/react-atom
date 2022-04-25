@@ -26,6 +26,7 @@ type AtomSpacingStyleProps<T extends Tokens = Tokens> = {
 type AtomColorStyleProps<T extends Tokens = Tokens> = {
   [key in CSSColorPropertiesKeys]?: ColorToken<T>;
 };
+
 export type AtomCustomStyleProps<T extends Tokens = Tokens> = {
   w?: SpacingToken<T>;
   minW?: SpacingToken<T>;
@@ -62,6 +63,7 @@ export type AtomCustomStyleProps<T extends Tokens = Tokens> = {
   gridSelfJustify?: AllowFalse<CSSProperties['justifySelf']>;
   gridSelfAlign?: AllowFalse<CSSProperties['alignSelf']>;
 };
+
 type AtomRestStyleProps<T extends Tokens = Tokens> = Omit<
   {
     [key in CSSPropertiesKeys]?: T[key] extends TokenKeys
@@ -70,6 +72,7 @@ type AtomRestStyleProps<T extends Tokens = Tokens> = Omit<
   },
   CSSSpacingPropertiesKeys | CSSColorPropertiesKeys | keyof AtomCustomStyleProps
 >;
+
 export type AtomStyleProps<T extends Tokens = Tokens> = AtomSpacingStyleProps<T> &
   AtomColorStyleProps<T> &
   AtomRestStyleProps<T> &
@@ -82,11 +85,12 @@ export type AtomPseudoClassProps<T extends Tokens = Tokens> = {
   focusWithin?: AtomStyleProps<T>;
 };
 
-export type PseudoClassStyle = { [key in keyof AtomPseudoClassProps<Tokens>]?: CSSProperties };
-
 export type AtomHtmlProps = Omit<HTMLProps<HTMLElement>, 'as'>;
+
 export type AtomProps<T extends Tokens = Tokens> = AtomStyleProps<T> &
   AtomPseudoClassProps<T> &
   AtomHtmlProps & { as?: ElementType };
+
+export type PseudoClassStyle = { [key in keyof AtomPseudoClassProps<Tokens>]?: CSSProperties };
 
 export type PLATFORM = 'web' | 'native' | 'miniprogram';
