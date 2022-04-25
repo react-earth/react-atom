@@ -88,3 +88,5 @@ export type AtomHtmlProps = Omit<HTMLProps<HTMLElement>, 'as'>;
 export type AtomProps<T extends Tokens = Tokens> = AtomStyleProps<T> &
   AtomPseudoClassProps<T> &
   AtomHtmlProps & { as?: ElementType };
+
+export type PLATFORM = 'web' | 'native' | 'miniprogram';
