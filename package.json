@@ -10,13 +10,8 @@
     "bootstrap": "lerna bootstrap",
     "watch": "lerna run watch --stream",
     "build": "lerna run build",
-    "version": "lerna version --conventional-commits --create-release github --yes",
+    "publish-packages": "lerna version -m \"chore: publish %s\" --conventional-commits --create-release github --yes",
     "examples": "yarn --cwd examples start"
-  },
-  "command": {
-    "publish": {
-      "message": "chore: publish %s"
-    }
   },
   "workspaces": {
     "packages": [
