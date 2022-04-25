@@ -9,8 +9,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "watch": "lerna run watch --stream",
-    "build": "lerna run build",
-    "publish-packages": "lerna version -m \"chore: publish %s\" --conventional-commits --create-release github --yes",
+    "release": "lerna version -m \"chore: publish packages\" --conventional-commits --create-release github --yes && lerna run build && lerna publish",
     "examples": "yarn --cwd examples start"
   },
   "workspaces": {
