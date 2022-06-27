@@ -18,6 +18,7 @@
     "dist"
   ],
   "scripts": {
+    "watch": "rollup -c -w",
     "build": "rimraf dist && rollup -c && rimraf dist/types",
     "prepublishOnly": "npm run build"
   },
