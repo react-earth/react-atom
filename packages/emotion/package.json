@@ -1,6 +1,6 @@
 {
   "name": "@react-atom/emotion",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/react-atom/react-atom.git"
@@ -22,7 +22,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@react-atom/core": "^2.1.0"
+    "@react-atom/core": "^2.1.1"
   },
   "peerDependencies": {
     "@emotion/react": ">=10.0.0",

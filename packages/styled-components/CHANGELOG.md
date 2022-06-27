@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.5](https://github.com/react-atom/react-atom/compare/@react-atom/styled-components@2.0.4...@react-atom/styled-components@2.0.5) (2022-06-27)
+
+**Note:** Version bump only for package @react-atom/styled-components
+
+
+
+
+
 ## [2.0.4](https://github.com/react-atom/react-atom/compare/@react-atom/styled-components@2.0.3...@react-atom/styled-components@2.0.4) (2022-04-25)
 
 **Note:** Version bump only for package @react-atom/styled-components
