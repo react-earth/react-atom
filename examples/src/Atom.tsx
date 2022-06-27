@@ -1,4 +1,4 @@
-import atom from '@react-atom/styled-components';
+import atom from '@react-atom/style';
 
 export const Atom = atom({
   spacing: {

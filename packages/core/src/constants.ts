@@ -1,8 +1,4 @@
-import { PLATFORM } from './types';
-
 export const DEFAULT_COMPONENT = 'div';
-
-export const DEFAULT_PLATFORM: PLATFORM = 'web';
 
 // from https://www.w3schools.com/cssref/default.asp
 export const CSS_PROPERTIES = [

@@ -87,10 +87,8 @@ export type AtomPseudoClassProps<T extends Tokens = Tokens> = {
 
 export type AtomHtmlProps = Omit<HTMLProps<HTMLElement>, 'as'>;
 
-export type AtomProps<T extends Tokens = Tokens> = AtomStyleProps<T> &
-  AtomPseudoClassProps<T> &
-  AtomHtmlProps & { as?: ElementType };
+export type AtomBaseProps<T extends Tokens> = AtomStyleProps<T> & AtomHtmlProps & { as?: ElementType };
+
+export type AtomProps<T extends Tokens = Tokens> = AtomBaseProps<T> & AtomPseudoClassProps<T>;
 
 export type PseudoClassStyle = { [key in keyof AtomPseudoClassProps<Tokens>]?: CSSProperties };
-
-export type PLATFORM = 'web' | 'native' | 'miniprogram';
