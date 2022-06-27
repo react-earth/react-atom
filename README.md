@@ -50,8 +50,6 @@ import atom from '@react-atom/styled-components';
 // base on emotion
 import atom from '@react-atom/emotion';
 
-const Atom = atom(tokens);
-
 // use you custom tokens
 const Atom = atom({
   fontFamily: {
