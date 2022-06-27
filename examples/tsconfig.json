@@ -5,10 +5,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@react-atom/style": ["../packages/style/src"],
-      "@react-atom/styled-components": ["../packages/styled-components/src"],
-      "@react-atom/emotion": ["../packages/emotion/src"],
-      "@react-atom/tokens": ["../packages/tokens/src"]
+      "@react-atom/styled-components": ["../packages/styled-components/src"]
     }
   }
 }
