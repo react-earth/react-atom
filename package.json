@@ -1,7 +1,6 @@
 {
-  "name": "@react-earth/react-atom",
-  "version": "0.1.2",
-  "private": true,
+  "name": "react-atom",
+  "version": "independent",
   "repository": {
     "type": "git",
     "url": "https://github.com/react-earth/react-atom.git"
@@ -15,14 +14,5 @@
     "packages/react-atom-core",
     "packages/react-atom-emotion",
     "packages/react-atom-styled"
-  ],
-  "devDependencies": {
-    "@release-it/bumper": "^5.1.0",
-    "release-it": "^16.2.1"
-  },
-  "release-it": {
-    "git": {
-      "requireCleanWorkingDir": false
-    }
-  }
+  ]
 }
