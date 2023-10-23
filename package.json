@@ -16,11 +16,6 @@
     "packages/react-atom-emotion",
     "packages/react-atom-styled"
   ],
-  "release-it": {
-    "git": {
-      "requireCleanWorkingDir": false
-    }
-  },
   "devDependencies": {
     "auto-changelog": "^2.4.0",
     "release-it": "^16.2.1"
