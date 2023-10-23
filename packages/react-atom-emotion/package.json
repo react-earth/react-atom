@@ -1,6 +1,6 @@
 {
   "name": "react-atom-emotion",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/react-earth/react-atom.git"
@@ -24,7 +24,7 @@
     "release": "release-it"
   },
   "dependencies": {
-    "react-atom-core": "0.1.2"
+    "react-atom-core": "0.1.3"
   },
   "peerDependencies": {
     "@emotion/react": ">=10.0.0",
