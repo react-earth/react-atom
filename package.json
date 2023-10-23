@@ -1,23 +1,28 @@
 {
-  "name": "react-atom",
-  "version": "independent",
+  "name": "@react-earth/react-atom",
+  "version": "0.1.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/react-atom/react-atom.git"
+    "url": "https://github.com/react-earth/react-atom.git"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "watch": "lerna run watch --parallel --stream",
-    "release": "lerna version -m \"chore: publish packages\" --conventional-commits --create-release github -y && lerna publish from-git -y"
+    "release": "npm run release --workspaces && release-it",
+    "app:install": "npm --prefix=app install",
+    "app:start": "npm --prefix=app start"
   },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
+  "workspaces": [
+    "packages/react-atom-core",
+    "packages/react-atom-emotion",
+    "packages/react-atom-styled"
+  ],
   "devDependencies": {
-    "lerna": "^5.1.6",
-    "nx": "^14.3.6"
+    "@release-it/bumper": "^5.1.0",
+    "release-it": "^16.2.1"
+  },
+  "release-it": {
+    "git": {
+      "requireCleanWorkingDir": false
+    }
   }
 }
