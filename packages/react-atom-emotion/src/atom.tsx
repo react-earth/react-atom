@@ -20,7 +20,7 @@ type AtomOptions = {
   defaultComponent?: ElementType;
 };
 
-export const atom = <T extends Tokens = Tokens, P = any>(tokens: T, options?: AtomOptions) => {
+export const atom = <T extends Tokens = Tokens>(tokens: T, options?: AtomOptions) => {
   const defaultComponent = options?.defaultComponent ?? DEFAULT_COMPONENT;
 
   return forwardRef<any, AtomProps<T>>((props, ref) => {

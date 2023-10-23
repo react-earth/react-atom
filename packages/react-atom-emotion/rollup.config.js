@@ -1,11 +1,10 @@
-import resolve from '@rollup/plugin-node-resolve';
 import externals from 'rollup-plugin-node-externals';
 import typescript from 'rollup-plugin-typescript2';
 import dts from 'rollup-plugin-dts';
 
 const packageJson = require('./package.json');
 
-const commonPlugins = [externals(), resolve(), typescript()];
+const commonPlugins = [externals(), typescript()];
 
 export default [
   {
@@ -25,7 +24,7 @@ export default [
   },
   {
     input: 'src/index.ts',
-    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
+    output: [{ file: 'dist/index.d.ts' }],
     plugins: [...commonPlugins, dts()],
   },
 ];
