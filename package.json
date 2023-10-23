@@ -1,12 +1,12 @@
 {
   "name": "react-atom",
-  "version": "independent",
+  "version": "0.1.7",
   "repository": {
     "type": "git",
     "url": "https://github.com/react-earth/react-atom.git"
   },
   "scripts": {
-    "release": "npm run release --workspaces && release-it",
+    "release": "release-it",
     "app:install": "npm --prefix=app install",
     "app:start": "npm --prefix=app start"
   },
@@ -14,5 +14,10 @@
     "packages/react-atom-core",
     "packages/react-atom-emotion",
     "packages/react-atom-styled"
-  ]
+  ],
+  "release-it": {
+    "git": {
+      "requireCleanWorkingDir": false
+    }
+  }
 }

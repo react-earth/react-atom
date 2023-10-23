@@ -36,6 +36,7 @@
   },
   "release-it": {
     "plugins": {
+      "git": false,
       "@release-it/bumper": {
         "out": [
           {
