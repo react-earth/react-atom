@@ -1,6 +1,7 @@
 {
-  "name": "react-atom",
-  "version": "0.1.7",
+  "name": "@react-earth/react-atom",
+  "version": "0.2.0",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/react-earth/react-atom.git"
