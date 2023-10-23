@@ -16,8 +16,10 @@
     "packages/react-atom-styled"
   ],
   "release-it": {
-    "git": {
-      "requireCleanWorkingDir": false
+    "plugins": {
+      "git": {
+        "requireCleanWorkingDir": false
+      }
     }
   }
 }
