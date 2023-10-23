@@ -2,37 +2,21 @@
 
 > Next generation atomization framework, build application atomic with you design ❤
 
-| Package                       | Version                                                                |
-| ----------------------------- | ---------------------------------------------------------------------- |
-| @react-atom/style             | ![version](https://img.shields.io/npm/v/@react-atom/style)             |
-| @react-atom/styled-components | ![version](https://img.shields.io/npm/v/@react-atom/styled-components) |
-| @react-atom/emotion           | ![version](https://img.shields.io/npm/v/@react-atom/emotion)           |
+## Packages
+
+| Package                         | Version                                                                |
+| ------------------------------- | ---------------------------------------------------------------------- |
+| `@react-atom/styled-components` | ![version](https://img.shields.io/npm/v/@react-atom/styled-components) |
+| `@react-atom/emotion`           | ![version](https://img.shields.io/npm/v/@react-atom/emotion)           |
+
 ## Install
 
-Using npm:
-
 ```sh
-# base on react build-in style
-npm install @react-atom/style
-
 # base on styled-components
 npm install @react-atom/styled-components
 
 # base on emotion
 npm install @react-atom/emotion
-```
-
-or using yarn:
-
-```sh
-# base on react build-in style
-yarn add @react-atom/style
-
-# base on styled-components
-yarn add @react-atom/styled-components
-
-# base on emotion
-yarn add @react-atom/emotion
 ```
 
 ## Usage
