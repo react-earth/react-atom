@@ -44,8 +44,5 @@
     "rollup-plugin-node-externals": "^4.0.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "^5.2.2"
-  },
-  "release-it": {
-    "git": false
   }
 }

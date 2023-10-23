@@ -1,0 +1,17 @@
+{
+  "git": false,
+  "plugins": {
+    "@release-it/bumper": {
+      "out": [
+        {
+          "file": "../react-atom-emotion/package.json",
+          "path": "dependencies.react-atom-core"
+        },
+        {
+          "file": "../react-atom-styled/package.json",
+          "path": "dependencies.react-atom-core"
+        }
+      ]
+    }
+  }
+}
