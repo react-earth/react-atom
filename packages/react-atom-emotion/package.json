@@ -46,8 +46,6 @@
     "typescript": "^5.2.2"
   },
   "release-it": {
-    "plugins": {
-      "git": false
-    }
+    "git": false
   }
 }
