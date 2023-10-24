@@ -23,12 +23,10 @@ type AtomOptions = {
 export const atom = <T extends Tokens = Tokens>(tokens: T, options?: AtomOptions) => {
   const defaultComponent = options?.defaultComponent ?? DEFAULT_COMPONENT;
 
-  return forwardRef<unknown, AtomProps<T>>((props, ref) => {
+  return forwardRef<any, AtomProps<T>>((props, ref) => {
     const { as: Component = defaultComponent, ...rest } = props;
     const { style, pseudoClassStyle, htmlProps } = parseAtomProps(rest as AtomProps, tokens);
-    return (
-      <StyledAtom as={Component} $style={style} ref={ref as any} $pseudoClassStyle={pseudoClassStyle} {...htmlProps} />
-    );
+    return <StyledAtom as={Component} $style={style} ref={ref} $pseudoClassStyle={pseudoClassStyle} {...htmlProps} />;
   });
 };
 
