@@ -1,64 +1,100 @@
-# React Atom
+![title](media/repo-header.svg)
 
-> Next generation atomization framework, build application atomic with you design ❤
+<p align="center">
+<a href="https://github.com/react-earth/react-atom" target="\_parent"><img alt="star" src="https://img.shields.io/github/stars/react-earth/react-atom.svg?style=social&label=Star" /></a>
+<a href="https://www.npmjs.com/package/react-atom-core" target="\_parent"><img src="https://img.shields.io/npm/v/react-atom-core" alt="version"></a>
+<a href="https://www.npmjs.com/package/react-atom-core" target="\_parent"><img alt="minzip" src="https://img.badgesize.io/https:/unpkg.com/react-atom-core@latest/dist/index.esm.js?compression=gzip" /></a>
+<a href="https://www.npmjs.com/package/react-atom-core" target="\_parent"><img alt="downloads" src="https://img.shields.io/npm/dm/react-atom.svg" /></a>
+<a href="https://github.com/react-earth/react-atom" target="\_parent"><img alt="license" src="https://img.shields.io/npm/l/react-atom-core" /></a>
+</p>
 
-## Packages
+## Packages 📦
 
-| Package                         | Version                                                                |
-| ------------------------------- | ---------------------------------------------------------------------- |
-| `@react-atom/styled-components` | ![version](https://img.shields.io/npm/v/@react-atom/styled-components) |
-| `@react-atom/emotion`           | ![version](https://img.shields.io/npm/v/@react-atom/emotion)           |
+- `react-atom-core`: convert atomically props to styles.
+- `react-atom-emotion`: [emotion](https://github.com/emotion-js/emotion) adapter for react-atom-core.
+- `react-atom-styled`: [styled-components](https://github.com/styled-components/styled-components) adapter for react-atom-core.
 
-## Install
+## Quick Features 🥳
+
+- Build apps atomically with your design tokens.
+- Supported emotion and styled-components.
+- Built with typescript, provide type protection, code autocompletion, make your app robust.
+
+## How to use 📖
+
+### Install package
 
 ```sh
-# base on styled-components
-npm install @react-atom/styled-components
+# use emotion
+npm install @emotion/react @emotion/styled react-atom-emotion
 
-# base on emotion
-npm install @react-atom/emotion
+# use styled-components
+npm install styled-components react-atom-styled
 ```
 
-## Usage
+### Define your design tokens
 
-Create you Atom component
+Create a file named `designTokens.ts` in your project.
 
 ```typescript
-// base on react build-in style
-import atom from '@react-atom/style';
-
-// base on styled-components
-import atom from '@react-atom/styled-components';
-
-// base on emotion
-import atom from '@react-atom/emotion';
-
-// use you custom tokens
-const Atom = atom({
-  fontFamily: {
-    // ...
-  },
-  fontSize: {
-    // ...
+export const designTokens = {
+  spacing: {
+    half: '4px',
+    '1x': '8px',
+    '2x': '16px',
+    '4x': '32px',
+    full: '100%',
   },
   color: {
-    // ...
+    primary: '#60A5FA',
+    background: '#EFF6FF',
   },
-  spacing: {
-    // ...
+  fontSize: {
+    title: '32px',
+    body: '16px',
   },
-  // ...
-});
+};
 ```
 
-Build you application atomic!
+### Create Atom component
 
-```typescript
+> Use react-atom-emotion as example, you also can use react-atom-styled.
+
+Create a file named `Atom.tsx` in your project.
+
+```tsx
+// use emotion or styled-components package
+import { atom } from 'react-atom-emotion';
+import { designTokens } from './designTokens';
+
+export const Atom = atom(designTokens);
+```
+
+### Build your app atomically with your design tokens
+
+```tsx
+import { Atom } from './Atom.tsx';
+
 const App = () => {
-  <Atom flex gap="1x">
-    <Atom w="8x" h="8x" bg="red50"/>
-    <Atom w="8x" h="8x" bg="green50"/>
-    <Atom w="8x" h="8x" bg="blue50"/>
-  <Atom>
-}
+  return (
+    <Atom
+      w="full"
+      h="full"
+      flex
+      flexDirection="column"
+      flexJustify="center"
+      flexAlign="center"
+      gap="1x"
+      c="primary"
+      bg="background"
+    >
+      <Atom fontSize="title" fontWeight="bold">
+        Hello, React Atom!
+      </Atom>
+      <Atom fontSize="body">Build your application with your design!</Atom>
+    </Atom>
+  );
+};
 ```
+
+[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-atom-demo-xj9dt7?file=/src/App.tsx)
