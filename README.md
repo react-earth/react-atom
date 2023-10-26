@@ -10,13 +10,13 @@
 
 ## Packages 📦
 
-- [react-atom-core](https://www.npmjs.com/package/react-atom-core): convert atomically props to styles.
-- [react-atom-emotion](https://www.npmjs.com/package/react-atom-emotion): [emotion](https://github.com/emotion-js/emotion) adapter for `react-atom-core`.
-- [react-atom-styled](https://www.npmjs.com/package/react-atom-styled): [styled-components](https://github.com/styled-components/styled-components) adapter for `react-atom-core`.
+- [react-atom-core](https://www.npmjs.com/package/react-atom-core): convert react atomically props to styles.
+- [react-atom-emotion](https://www.npmjs.com/package/react-atom-emotion): react atom for [emotion](https://github.com/emotion-js/emotion).
+- [react-atom-styled](https://www.npmjs.com/package/react-atom-styled): react atom for [styled-components](https://github.com/styled-components/styled-components).
 
 ## Quick Features 🥳
 
-- Build apps atomically with your design tokens.
+- Build application atomically with your design tokens.
 - Supported emotion and styled-components.
 - Built with typescript, provide type protection, code autocompletion, make your app robust.
 
@@ -39,46 +39,50 @@ Create a file named `designTokens.ts` in your project.
 ```typescript
 export const designTokens = {
   spacing: {
-    half: '4px',
     '1x': '8px',
     '2x': '16px',
     '4x': '32px',
     full: '100%',
+    fullW: '100vw',
+    fullH: '100vh',
   },
   color: {
-    primary: '#60A5FA',
-    background: '#EFF6FF',
+    primary: '#4CB074',
+    background: '#ECF5F0',
   },
   fontSize: {
-    title: '32px',
-    body: '16px',
+    xxl: '32px',
+    xl: '38px',
+    lg: '24px',
+    md: '16px',
+    sm: '14px',
+    xs: '12px',
   },
 };
 ```
 
 ### Create Atom component
 
-> Use react-atom-emotion as example, you also can use react-atom-styled.
-
 Create a file named `Atom.tsx` in your project.
 
 ```tsx
-import { atom } from 'react-atom-emotion';
+// You also can use react-atom-styled here
+import atom from 'react-atom-emotion';
 import { designTokens } from './designTokens';
 
 export const Atom = atom(designTokens);
 ```
 
-### Build your app atomically with your design tokens
+### Build application atomically with your design tokens
 
 ```tsx
-import { Atom } from './Atom.tsx';
+import { Atom } from './Atom';
 
-const App = () => {
+export default function App() {
   return (
     <Atom
-      w="full"
-      h="full"
+      w="fullW"
+      h="fullH"
       flex
       flexDirection="column"
       flexJustify="center"
@@ -87,13 +91,13 @@ const App = () => {
       c="primary"
       bg="background"
     >
-      <Atom fontSize="title" fontWeight="bold">
+      <Atom fontSize="xxl" fontWeight="bold">
         Hello, React Atom!
       </Atom>
-      <Atom fontSize="body">Build your application with your design!</Atom>
+      <Atom fontSize="md">Build application atomically with your design!</Atom>
     </Atom>
   );
-};
+}
 ```
 
 [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-atom-demo-xj9dt7?file=/src/App.tsx)

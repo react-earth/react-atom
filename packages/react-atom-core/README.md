@@ -1,9 +1,5 @@
-# react-atom-core
+# React Atom Core
 
-Build your application atomic with your design!
+Convert react atomically props to styles.
 
-## Install
-
-```sh
-npm install react-atom-core
-```
+📖 [More details](https://github.com/react-earth/react-atom)

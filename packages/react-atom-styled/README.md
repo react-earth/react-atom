@@ -1,9 +1,5 @@
-# react-atom-styled
+# React Atom Styled
 
-Build your application atomic with your design! (base on styled-components)
+React atom for [styled-components](https://github.com/styled-components/styled-components).
 
-## Install
-
-```sh
-npm install react-atom-styled
-```
+📖 [More details](https://github.com/react-earth/react-atom)

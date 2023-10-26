@@ -1,9 +1,5 @@
-# react-atom-emotion
+# React Atom Emotion
 
-Build your application atomic with your design! (base on emotion)
+React atom for [emotion](https://github.com/emotion-js/emotion).
 
-## Install
-
-```sh
-npm install react-atom-emotion
-```
+📖 [More details](https://github.com/react-earth/react-atom)
