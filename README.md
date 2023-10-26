@@ -1,11 +1,11 @@
 ![title](media/repo-header.svg)
 
 <p align="center">
-<a href="https://github.com/react-earth/react-atom" target="\_parent"><img alt="star" src="https://img.shields.io/github/stars/react-earth/react-atom.svg?style=social&label=Star" /></a>
-<a href="https://www.npmjs.com/package/react-atom-core" target="\_parent"><img src="https://img.shields.io/npm/v/react-atom-core" alt="version"></a>
-<a href="https://www.npmjs.com/package/react-atom-core" target="\_parent"><img alt="minzip" src="https://img.badgesize.io/https:/unpkg.com/react-atom-core@latest/dist/index.esm.js?compression=gzip" /></a>
-<a href="https://www.npmjs.com/package/react-atom-core" target="\_parent"><img alt="downloads" src="https://img.shields.io/npm/dm/react-atom.svg" /></a>
-<a href="https://github.com/react-earth/react-atom" target="\_parent"><img alt="license" src="https://img.shields.io/npm/l/react-atom-core" /></a>
+<a href="https://github.com/react-earth/react-atom" ><img alt="star" src="https://img.shields.io/github/stars/react-earth/react-atom.svg?style=social&label=Star" /></a>
+<a href="https://www.npmjs.com/package/react-atom-core" ><img src="https://img.shields.io/npm/v/react-atom-core" alt="version"></a>
+<a href="https://www.npmjs.com/package/react-atom-core" ><img alt="minzip" src="https://img.badgesize.io/https:/unpkg.com/react-atom-core@latest/dist/index.esm.js?compression=gzip" /></a>
+<a href="https://www.npmjs.com/package/react-atom-core" ><img alt="downloads" src="https://img.shields.io/npm/dm/react-atom.svg" /></a>
+<a href="https://github.com/react-earth/react-atom" ><img alt="license" src="https://img.shields.io/npm/l/react-atom-core" /></a>
 </p>
 
 ## Packages 📦
@@ -100,4 +100,9 @@ export default function App() {
 }
 ```
 
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-atom-demo-xj9dt7?file=/src/App.tsx)
+Click [here](https://codesandbox.io/s/react-atom-demo-xj9dt7?file=/src/App.tsx) to try it by yourself.
+
+## React Atom Ecosystem 🌍
+
+- [React Atom Tokens](https://github.com/react-earth/react-atom-tokens): build-in design tokens, such as MUI, Chakra UI, Ant Design, etc.
+- [React Atom UI](https://github.com/react-earth/react-atom-ui): UI components built with React Atom, such as Button, Switch, etc.
