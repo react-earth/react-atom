@@ -11,8 +11,8 @@
 ## Packages 📦
 
 - `react-atom-core`: convert atomically props to styles.
-- `react-atom-emotion`: [emotion](https://github.com/emotion-js/emotion) adapter for react-atom-core.
-- `react-atom-styled`: [styled-components](https://github.com/styled-components/styled-components) adapter for react-atom-core.
+- `react-atom-emotion`: [emotion](https://github.com/emotion-js/emotion) adapter for `react-atom-core`.
+- `react-atom-styled`: [styled-components](https://github.com/styled-components/styled-components) adapter for `react-atom-core`.
 
 ## Quick Features 🥳
 
@@ -63,7 +63,6 @@ export const designTokens = {
 Create a file named `Atom.tsx` in your project.
 
 ```tsx
-// use emotion or styled-components package
 import { atom } from 'react-atom-emotion';
 import { designTokens } from './designTokens';
 
