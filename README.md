@@ -10,9 +10,9 @@
 
 ## Packages 📦
 
-- `react-atom-core`: convert atomically props to styles.
-- `react-atom-emotion`: [emotion](https://github.com/emotion-js/emotion) adapter for `react-atom-core`.
-- `react-atom-styled`: [styled-components](https://github.com/styled-components/styled-components) adapter for `react-atom-core`.
+- [react-atom-core](https://www.npmjs.com/package/react-atom-core): convert atomically props to styles.
+- [react-atom-emotion](https://www.npmjs.com/package/react-atom-emotion): [emotion](https://github.com/emotion-js/emotion) adapter for `react-atom-core`.
+- [react-atom-styled](https://www.npmjs.com/package/react-atom-styled): [styled-components](https://github.com/styled-components/styled-components) adapter for `react-atom-core`.
 
 ## Quick Features 🥳
 
