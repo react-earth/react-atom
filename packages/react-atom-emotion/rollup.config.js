@@ -4,7 +4,8 @@ import dts from 'rollup-plugin-dts';
 
 const packageJson = require('./package.json');
 
-const commonPlugins = [externals(), typescript()];
+const commonPlugins = [externals(), typescript({ exclude: ['**/*.test.ts'] })];
+const commonExternal = ['object-standard-path'];
 
 export default [
   {
@@ -20,11 +21,13 @@ export default [
         format: 'esm',
       },
     ],
+    external: commonExternal,
     plugins: commonPlugins,
   },
   {
     input: 'src/index.ts',
     output: [{ file: 'dist/index.d.ts' }],
+    external: commonExternal,
     plugins: [...commonPlugins, dts()],
   },
 ];

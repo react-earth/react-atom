@@ -1,7 +1,5 @@
-export const DEFAULT_COMPONENT = 'div';
-
 // from https://www.w3schools.com/cssref/default.asp
-export const CSS_PROPERTIES = [
+export const ATOM_CSS_PROPERTIES = [
   'accentColor',
   'alignContent',
   'alignItems',
@@ -228,7 +226,26 @@ export const CSS_PROPERTIES = [
   'zIndex',
 ] as const;
 
-export const CSS_SPACING_PROPERTIES = [
+// properties that use color tokens
+export const ATOM_CSS_COLOR_PROPERTIES = [
+  'color',
+  'fill',
+  'background',
+  'backgroundColor',
+  'borderColor',
+  'borderTopColor',
+  'borderBottomColor',
+  'borderLeftColor',
+  'borderRightColor',
+  'outlineColor',
+  'textDecorationColor',
+  'accentColor',
+  'caretColor',
+  'columnRuleColor',
+] as const;
+
+// properties that use spacing tokens
+export const ATOM_CSS_SPACING_PROPERTIES = [
   'width',
   'minWidth',
   'maxWidth',
@@ -266,19 +283,40 @@ export const CSS_SPACING_PROPERTIES = [
   'maskSize',
 ] as const;
 
-export const CSS_COLOR_PROPERTIES = [
-  'color',
-  'fill',
-  'background',
-  'backgroundColor',
-  'borderColor',
-  'borderTopColor',
-  'borderBottomColor',
-  'borderLeftColor',
-  'borderRightColor',
-  'outlineColor',
-  'textDecorationColor',
-  'accentColor',
-  'caretColor',
-  'columnRuleColor',
+// from https://www.w3schools.com/css/css_pseudo_classes.asp
+export const ATOM_PSEUDO_CLASSES = [
+  '$active',
+  '$checked',
+  '$disabled',
+  '$empty',
+  '$enabled',
+  '$firstChild',
+  '$firstOfType',
+  '$focus',
+  '$hover',
+  '$inRange',
+  '$invalid',
+  '$lastChild',
+  '$lastOfType',
+  '$link',
+  '$onlyOfType',
+  '$onlyChild',
+  '$optional',
+  '$outOfRange',
+  '$readOnly',
+  '$readWrite',
+  '$required',
+  '$target',
+  '$valid',
+  '$visited',
+] as const;
+
+// from https://www.w3schools.com/css/css_pseudo_elements.asp
+export const ATOM_PSEUDO_ELEMENTS = [
+  '$$after',
+  '$$before',
+  '$$firstLetter',
+  '$$firstLine',
+  '$$marker',
+  '$$selection',
 ] as const;

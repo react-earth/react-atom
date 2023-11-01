@@ -1,94 +1,115 @@
 import { CSSProperties, ElementType, HTMLProps } from 'react';
-import { CSS_COLOR_PROPERTIES, CSS_PROPERTIES, CSS_SPACING_PROPERTIES } from './constants';
+import { Path } from 'object-standard-path';
+import {
+  ATOM_CSS_COLOR_PROPERTIES,
+  ATOM_CSS_PROPERTIES,
+  ATOM_CSS_SPACING_PROPERTIES,
+  ATOM_PSEUDO_CLASSES,
+  ATOM_PSEUDO_ELEMENTS,
+} from './constants';
 
+// covert readonly array to array values type
 type ArrayValuesType<T extends ReadonlyArray<unknown>> = T extends ReadonlyArray<infer V> ? V : never;
 
-type CSSPropertiesKeys = ArrayValuesType<typeof CSS_PROPERTIES>;
-type CSSSpacingPropertiesKeys = ArrayValuesType<typeof CSS_SPACING_PROPERTIES>;
-type CSSColorPropertiesKeys = ArrayValuesType<typeof CSS_COLOR_PROPERTIES>;
+// keep auto-completion, and allow using custom string
+type AllowCustomString<T> = T | (string & {});
 
-type TokenKeys = { [key: string]: string | number };
+// override type
+type Override<T, P> = Omit<T, keyof P> & P;
 
-export type Tokens = {
-  color?: TokenKeys;
-  spacing?: TokenKeys;
-} & { [key in CSSPropertiesKeys]?: TokenKeys };
+type AtomCSSPropertiesKeys = ArrayValuesType<typeof ATOM_CSS_PROPERTIES>;
+type AtomCSSColorPropertiesKeys = ArrayValuesType<typeof ATOM_CSS_COLOR_PROPERTIES>;
+type AtomCSSSpacingPropertiesKeys = ArrayValuesType<typeof ATOM_CSS_SPACING_PROPERTIES>;
+type AtomPseudoClassKeys = ArrayValuesType<typeof ATOM_PSEUDO_CLASSES>;
+type AtomPseudoElementKeys = ArrayValuesType<typeof ATOM_PSEUDO_ELEMENTS>;
 
-type AllowFalse<T> = T | false;
-type TokenKeyExtends<T> = AllowFalse<T | number | (string & {})>;
-
-type SpacingToken<T extends Tokens = Tokens> = TokenKeyExtends<keyof T['spacing']>;
-type ColorToken<T extends Tokens = Tokens> = TokenKeyExtends<keyof T['color']>;
-
-type AtomSpacingStyleProps<T extends Tokens = Tokens> = {
-  [key in CSSSpacingPropertiesKeys]?: SpacingToken<T>;
-};
-type AtomColorStyleProps<T extends Tokens = Tokens> = {
-  [key in CSSColorPropertiesKeys]?: ColorToken<T>;
+export type AtomTokens = { [key in AtomCSSPropertiesKeys]?: object } & {
+  color?: object;
+  spacing?: object;
 };
 
-export type AtomCustomStyleProps<T extends Tokens = Tokens> = {
-  w?: SpacingToken<T>;
-  minW?: SpacingToken<T>;
-  maxW?: SpacingToken<T>;
-  h?: SpacingToken<T>;
-  minH?: SpacingToken<T>;
-  maxH?: SpacingToken<T>;
-  m?: SpacingToken<T>;
-  mx?: SpacingToken<T>;
-  my?: SpacingToken<T>;
-  ml?: SpacingToken<T>;
-  mr?: SpacingToken<T>;
-  mt?: SpacingToken<T>;
-  mb?: SpacingToken<T>;
-  p?: SpacingToken<T>;
-  px?: SpacingToken<T>;
-  py?: SpacingToken<T>;
-  pl?: SpacingToken<T>;
-  pr?: SpacingToken<T>;
-  pt?: SpacingToken<T>;
-  pb?: SpacingToken<T>;
-  c?: ColorToken<T>;
-  bg?: ColorToken<T>;
+type AtomColorToken<T extends AtomTokens = AtomTokens> = AllowCustomString<Path<T['color']>>;
+// allow spacing use number directly
+type AtomSpacingToken<T extends AtomTokens = AtomTokens> = AllowCustomString<Path<T['spacing']>> | number;
+
+// atom color style props
+type AtomColorStyleProps<T extends AtomTokens = AtomTokens> = {
+  [key in AtomCSSColorPropertiesKeys]?: AtomColorToken<T>;
+};
+
+// atom spacing style props
+type AtomSpacingStyleProps<T extends AtomTokens = AtomTokens> = {
+  [key in AtomCSSSpacingPropertiesKeys]?: AtomSpacingToken<T>;
+};
+
+// atom custom style props
+export type AtomCustomStyleProps<T extends AtomTokens = AtomTokens> = {
+  w?: AtomSpacingToken<T>;
+  minW?: AtomSpacingToken<T>;
+  maxW?: AtomSpacingToken<T>;
+  h?: AtomSpacingToken<T>;
+  minH?: AtomSpacingToken<T>;
+  maxH?: AtomSpacingToken<T>;
+  m?: AtomSpacingToken<T>;
+  mx?: AtomSpacingToken<T>;
+  my?: AtomSpacingToken<T>;
+  ml?: AtomSpacingToken<T>;
+  mr?: AtomSpacingToken<T>;
+  mt?: AtomSpacingToken<T>;
+  mb?: AtomSpacingToken<T>;
+  p?: AtomSpacingToken<T>;
+  px?: AtomSpacingToken<T>;
+  py?: AtomSpacingToken<T>;
+  pl?: AtomSpacingToken<T>;
+  pr?: AtomSpacingToken<T>;
+  pt?: AtomSpacingToken<T>;
+  pb?: AtomSpacingToken<T>;
+  c?: AtomColorToken<T>;
+  bg?: AtomColorToken<T>;
   flex?: boolean;
-  flexJustify?: AllowFalse<CSSProperties['justifyContent']>;
-  flexAlign?: AllowFalse<CSSProperties['alignItems']>;
+  flexJustify?: CSSProperties['justifyContent'];
+  flexAlign?: CSSProperties['alignItems'];
   grid?: boolean;
-  gridColumns?: AllowFalse<number>;
-  gridRows?: AllowFalse<number>;
-  gridJustify?: AllowFalse<CSSProperties['justifyItems']>;
-  gridAlign?: AllowFalse<CSSProperties['alignItems']>;
-  gridSelfColumns?: AllowFalse<number>;
-  gridSelfRows?: AllowFalse<number>;
-  gridSelfJustify?: AllowFalse<CSSProperties['justifySelf']>;
-  gridSelfAlign?: AllowFalse<CSSProperties['alignSelf']>;
+  gridColumns?: number;
+  gridRows?: number;
+  gridJustify?: CSSProperties['justifyItems'];
+  gridAlign?: CSSProperties['alignItems'];
+  gridSelfColumns?: number;
+  gridSelfRows?: number;
+  gridSelfJustify?: CSSProperties['justifySelf'];
+  gridSelfAlign?: CSSProperties['alignSelf'];
 };
 
-type AtomRestStyleProps<T extends Tokens = Tokens> = Omit<
-  {
-    [key in CSSPropertiesKeys]?: T[key] extends TokenKeys
-      ? TokenKeyExtends<keyof T[key]>
-      : AllowFalse<CSSProperties[key]>;
-  },
-  CSSSpacingPropertiesKeys | CSSColorPropertiesKeys | keyof AtomCustomStyleProps
+// atom rest style props
+type AtomRestStyleProps<T extends AtomTokens = AtomTokens> = {
+  [key in Exclude<
+    AtomCSSPropertiesKeys,
+    AtomCSSColorPropertiesKeys | AtomCSSSpacingPropertiesKeys | keyof AtomCustomStyleProps
+  >]?: key extends keyof T ? Path<T[key]> : CSSProperties[key];
+};
+
+// all atom style props
+export type AtomStyleProps<T extends AtomTokens = AtomTokens> = AtomColorStyleProps<T> &
+  AtomSpacingStyleProps<T> &
+  AtomCustomStyleProps<T> &
+  AtomRestStyleProps<T>;
+
+// atom pseudo class props
+export type AtomPseudoClassProps<T extends AtomTokens = AtomTokens> = {
+  [key in AtomPseudoClassKeys]?: AtomStyleProps<T>;
+};
+
+// atom pseudo element props
+export type AtomPseudoElementProps<T extends AtomTokens = AtomTokens> = {
+  [key in AtomPseudoElementKeys]?: AtomStyleProps<T>;
+};
+
+// atom props
+export type AtomProps<T extends AtomTokens = AtomTokens> = Override<
+  HTMLProps<HTMLElement>,
+  AtomStyleProps<T> &
+    AtomPseudoClassProps<T> &
+    AtomPseudoElementProps<T> & {
+      as?: ElementType;
+    }
 >;
-
-export type AtomStyleProps<T extends Tokens = Tokens> = AtomSpacingStyleProps<T> &
-  AtomColorStyleProps<T> &
-  AtomRestStyleProps<T> &
-  AtomCustomStyleProps<T>;
-
-export type AtomPseudoClassProps<T extends Tokens = Tokens> = {
-  hover?: AtomStyleProps<T>;
-  active?: AtomStyleProps<T>;
-  focus?: AtomStyleProps<T>;
-  focusWithin?: AtomStyleProps<T>;
-};
-
-export type AtomHtmlProps = Omit<HTMLProps<HTMLElement>, 'as'>;
-
-export type AtomBaseProps<T extends Tokens> = AtomStyleProps<T> & AtomHtmlProps & { as?: ElementType };
-
-export type AtomProps<T extends Tokens = Tokens> = AtomBaseProps<T> & AtomPseudoClassProps<T>;
-
-export type PseudoClassStyle = { [key in keyof AtomPseudoClassProps<Tokens>]?: CSSProperties };

@@ -1,6 +1,6 @@
 {
   "name": "@react-earth/react-atom",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "repository": {
     "type": "git",
@@ -14,7 +14,8 @@
   "workspaces": [
     "packages/react-atom-core",
     "packages/react-atom-emotion",
-    "packages/react-atom-styled"
+    "packages/react-atom-styled",
+    "packages/react-atom-tokens"
   ],
   "devDependencies": {
     "auto-changelog": "^2.4.0",

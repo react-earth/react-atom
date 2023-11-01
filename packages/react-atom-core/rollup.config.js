@@ -1,9 +1,10 @@
+import externals from 'rollup-plugin-node-externals';
 import typescript from 'rollup-plugin-typescript2';
 import dts from 'rollup-plugin-dts';
 
 const packageJson = require('./package.json');
 
-const commonPlugins = [typescript()];
+const commonPlugins = [externals(), typescript({ exclude: ['**/*.test.ts'] })];
 
 export default [
   {
