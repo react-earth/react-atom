@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`atom Atom component render correctly 1`] = `
+.c0 {
+  color: #F0FFF4;
+  width: 500px;
+  height: 1rem;
+  font-size: 24rem;
+}
+
+.c0:hover {
+  color: #FFFFFF;
+}
+
+.c0::after {
+  width: 1rem;
+}
+
+<span
+  class="c0"
+/>
+`;
