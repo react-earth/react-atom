@@ -1,6 +1,6 @@
 {
   "name": "react-atom-styled",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/react-earth/react-atom.git"
@@ -24,7 +24,7 @@
     "release": "release-it"
   },
   "dependencies": {
-    "react-atom-core": "0.4.1"
+    "react-atom-core": "0.4.2"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
