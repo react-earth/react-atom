@@ -119,7 +119,6 @@ const parseAtomStyleProps = <T extends AtomTokens>(atomStyleProps: AtomStyleProp
       }
     }
   });
-  console.log({ atomStyleProps, style });
   return style;
 };
 
