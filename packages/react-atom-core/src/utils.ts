@@ -27,7 +27,7 @@ const parseValue = (value: any | any[], tokens: AtomTokens, tokenKey?: keyof Ato
         // add px if is spacing and value is number
         return value + 'px';
       } else if (tokenKey in tokens) {
-        return pathGet(tokens[tokenKey], value);
+        return pathGet(tokens[tokenKey], value) ?? value;
       }
     }
     return value;
@@ -119,6 +119,7 @@ const parseAtomStyleProps = <T extends AtomTokens>(atomStyleProps: AtomStyleProp
       }
     }
   });
+  console.log({ atomStyleProps, style });
   return style;
 };
 
